@@ -19,7 +19,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-linkify": "^1.0.0-alpha",
-    "zod": "^3.22.4"
+    "zod": "^3.22.4",
+    "@vercel/analytics": "^1.4.1"
   },
   "devDependencies": {
     "@ngrok/ngrok": "^1.4.1",
