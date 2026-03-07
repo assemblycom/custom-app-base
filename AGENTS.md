@@ -144,10 +144,13 @@ Import components from `@assembly-js/design-system`:
 import { Button, Heading, Body, Icon } from '@assembly-js/design-system';
 ```
 
-See the Design System section in the app for examples, or explore the full [Storybook](https://main--6639299038cefd2601c9e48a.chromatic.com/).
+See the Design System section in the app for examples, or explore the full [Storybook](https://design-system.assembly.com/).
+
+### Working with assembly design system components
+
+- do NOT make up props for the assembly design system components, use the ones that are available. Don't assume additional HTML attributes will be spread to the underlying DOM element and compile correctly.
 
 ## Resources
 
 - [Custom Apps Guide](https://docs.assembly.com/docs/custom-apps-overview)
 - [API Reference](https://docs.assembly.com/reference/getting-started-introduction)
-- [Experts Directory](https://assembly.com/experts)
