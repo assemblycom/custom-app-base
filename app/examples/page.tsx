@@ -36,11 +36,14 @@ async function Content({ searchParams }: { searchParams: SearchParams }) {
   );
 }
 
-export default async function Home({ searchParams }: { searchParams: Promise<SearchParams> }) {
+export default async function ExamplesPage({
+  searchParams,
+}: {
+  searchParams: Promise<SearchParams>;
+}) {
   const params = await searchParams;
   const hasToken = 'token' in params && typeof params.token === 'string';
 
-  // Check for API key before proceeding
   if (!process.env.ASSEMBLY_API_KEY) {
     return <MissingApiKey />;
   }

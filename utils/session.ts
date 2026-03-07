@@ -1,5 +1,23 @@
 import { assemblyApi } from '@assembly-js/node-sdk';
 import { need } from '@/utils/need';
+import type { ViewType } from '@/utils/types';
+
+export function determineViewType(tokenPayload: {
+  internalUserId?: string;
+  clientId?: string;
+  companyId?: string;
+} | undefined): ViewType {
+  if (tokenPayload?.internalUserId) {
+    if (tokenPayload.clientId || tokenPayload.companyId) {
+      return 'internal-detail';
+    }
+    return 'internal-overview';
+  }
+  if (tokenPayload?.clientId) {
+    return 'client';
+  }
+  return 'internal-overview';
+}
 
 /**
  * A helper function that instantiates the Assembly SDK and fetches data
@@ -22,15 +40,18 @@ export async function getSession(searchParams: SearchParams) {
         : undefined,
   });
 
+  const tokenPayload = await assembly.getTokenPayload?.();
+
   const data: {
+    viewType: ViewType;
     workspace: Awaited<ReturnType<typeof assembly.retrieveWorkspace>>;
     client?: Awaited<ReturnType<typeof assembly.retrieveClient>>;
     company?: Awaited<ReturnType<typeof assembly.retrieveCompany>>;
     internalUser?: Awaited<ReturnType<typeof assembly.retrieveInternalUser>>;
   } = {
+    viewType: determineViewType(tokenPayload ?? undefined),
     workspace: await assembly.retrieveWorkspace(),
   };
-  const tokenPayload = await assembly.getTokenPayload?.();
 
   if (tokenPayload?.clientId) {
     data.client = await assembly.retrieveClient({ id: tokenPayload.clientId });

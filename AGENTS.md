@@ -1,103 +1,101 @@
 # Assembly Custom App Development Guide
 
-## Context
+## App Context
 
-This app runs as an **iframe** embedded within the Assembly.com dashboard (for internal users) and client portal (for clients). It communicates with the parent frame via the app-bridge for UI controls like breadcrumbs and header actions.
+This app is a Next.js iframe embedded in the Assembly dashboard (internal users) and client portal (clients). A `token` query parameter identifies the user, workspace, and context. The API key stays server-side — use server components or API routes for SDK calls, never client components.
 
-When your app loads, Assembly passes a `token` query parameter that identifies the current user, workspace, and context. This token is used with the Node SDK to fetch data and make API calls.
+Entry point: `app/page.tsx` (server component, routes by view type). Session init: `utils/session.ts`.
 
-## TypeScript Rules
+## View Patterns
 
-- Import types from source modules, don't recreate inline.
-- Define stores/contexts before consuming components.
-- Verify prop signatures before use; match type names exactly.
-- Export constants needed by other files.
+Three view types based on token payload (see `utils/types.ts` for `ViewType`):
 
-## Using the Node SDK
+| ViewType | Token Contains | Component | Route |
+|---|---|---|---|
+| `internal-overview` | `internalUserId` only | `InternalOverview` | `/` |
+| `internal-detail` | `internalUserId` + `clientId`/`companyId` | `DetailView` | `/` or `/detail` |
+| `client` | `clientId` (no `internalUserId`) | `ClientView` | `/` |
 
-The SDK is generated based on the assembly openapi spec https://docs.assembly.com/openapi/core-resources.json.
-See `src/utils/session.ts` for a complete example.
+View type is determined in `utils/session.ts` via `determineViewType()`. The home page server component calls `getSession()` and renders the matching view. In-app navigation from overview to detail uses `app/detail/page.tsx` with query params.
 
-- Initializing the SDK requires your API key and the session token from query params
-- Before using SDK methods or accessing SDK type properties, read the source type/function definition to verify: (1) required vs optional parameters, (2) property nullability. Never assume signatures — verify in the same session.
-- When using methods from the SDK confirm that parameters required based on the spec. Any endpoints that have parameters are expected to have a parameter object that is used to pass the parameters to the endpoint which can be empty if no parameters are required.
-- When handling the responses from SDK endpoints and formatting, mutating or assigning to variables, use a type guard filter that removes any invalid objects without a valid types. By default the SDK generates all the response object types with optional properties, so this ensures that assigned values have the correct types.
+## SDK Patterns
 
-
-## Architecture Pattern
-
-### Keep the API Key Server-Side
-
-Use Next.js server components or API routes to make SDK calls:
-
-```
-src/
-├── app/
-│   ├── page.tsx          # Server component - can use SDK
-│   └── api/
-│       └── data/
-│           └── route.ts  # API route - can use SDK
-├── components/
-│   └── MyClient.tsx      # Client component - fetch from API routes
-└── utils/
-    └── session.ts        # SDK helper (server-only)
-```
-
-### Creating API Routes
+The SDK is generated from the [OpenAPI spec](https://docs.assembly.com/openapi/core-resources.json). Always verify method signatures from type definitions before use.
 
 ```typescript
-// src/app/api/clients/route.ts
-import { assemblyApi } from '@assembly-js/node-sdk';
+// Initialize (server-side only) — see utils/session.ts
+const assembly = assemblyApi({ apiKey: process.env.ASSEMBLY_API_KEY!, token });
 
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const token = searchParams.get('token');
-
-  const assembly = assemblyApi({
-    apiKey: process.env.ASSEMBLY_API_KEY!,
-    token: token ?? undefined,
-  });
-
-  const clients = await assembly.listClients();
-  return Response.json(clients);
-}
+// All response properties are optional — always filter with type guards
+const clients = await assembly.listClients({ limit: 20, nextToken });
+const valid = (clients.data ?? []).filter(
+  (c): c is typeof c & { id: string } => !!c.id
+);
 ```
 
-### Client Components
+Key methods: `listClients`, `listCompanies`, `listNotes`, `createNote({ requestBody })`, `retrieveTasks`, `createTask({ requestBody })`, `listFiles({ channelId })`, `listFileChannels`. Mutations use `requestBody` in the parameter object. Pagination uses `limit` + `nextToken`.
 
-Fetch data from your API routes, not directly from the SDK:
+## API Route Patterns
+
+Token is passed via `Authorization: Bearer <token>` header (not query params). Routes use shared helpers from `app/api/_helpers.ts`:
 
 ```typescript
-'use client';
-
-export function ClientList({ token }: { token: string }) {
-  const [clients, setClients] = useState([]);
-
-  useEffect(() => {
-    fetch(`/api/clients?token=${token}`)
-      .then(res => res.json())
-      .then(setClients);
-  }, [token]);
-
-  return <ul>{clients.map(c => <li key={c.id}>{c.givenName}</li>)}</ul>;
-}
+// app/api/notes/route.ts — example pattern
+const token = extractToken(request);  // from Authorization header
+if (!token) return unauthorizedResponse();
+const assembly = initSdk(token);
+const result = await assembly.listNotes({ entityType, entityId });
+return Response.json(result);
 ```
+
+Error responses use `{ error: string }` shape (see `utils/types.ts` `ApiError`). Mutation routes validate with zod schemas. See `app/api/notes/route.ts` for a complete GET/POST/PUT/DELETE example.
+
+## Bridge Patterns
+
+The app bridge communicates with the parent Assembly frame for header controls. Configure before use with `useBridgeConfig(portalUrl)` — see `bridge/hooks.ts`.
+
+```typescript
+// Detail view breadcrumbs with back navigation
+useBreadcrumbs([
+  { label: 'Custom App', onClick: () => router.push('/') },
+  { label: entityName },
+]);
+// Header CTA button — auto-cleared on unmount
+usePrimaryCta({ label: 'Add Note', icon: 'Plus', onClick: openDialog });
+```
+
+Available hooks: `useBreadcrumbs`, `usePrimaryCta`, `useSecondaryCta`, `useActionsMenu`. All auto-clear on component unmount.
 
 ## Design System
 
-Import components from `@assembly-js/design-system`:
+Import UI components from `@assembly-js/design-system`. Never use native HTML elements for buttons, headings, text, or form inputs.
 
 ```typescript
-import { Button, Heading, Body, Icon } from '@assembly-js/design-system';
+import { Button, Heading, Body, Icon, Input, Textarea, Status, Spinner } from '@assembly-js/design-system';
 ```
 
-See the Design System section in the app for examples, or explore the full [Storybook](https://design-system.assembly.com/).
+Do NOT make up props — verify in [Storybook](https://design-system.assembly.com/). Key notes:
+- `Button` uses `label` prop (not children), supports `variant`, `size`, `loading`
+- `Input` and `Textarea` extend native HTML attributes, add `label` and `error` props
+- For tabs, dialogs, and selects, use Radix primitives (`@radix-ui/react-tabs`, `@radix-ui/react-dialog`, `@radix-ui/react-select`) with Tailwind styling
+- Loading states use `Spinner` component. For content-shaped placeholders, use `animate-pulse` divs
 
-### Working with assembly design system components
+See `components/shared/EmptyState.tsx` and `components/resources/NoteForm.tsx` for examples.
 
-- do NOT make up props for the assembly design system components, use the ones that are available. Don't assume additional HTML attributes will be spread to the underlying DOM element and compile correctly.
+## Data Fetching (Client Components)
+
+Client components use SWR hooks from `hooks/useApi.ts`:
+
+```typescript
+const { data, isLoading, mutate } = useApi<Response>('/api/notes', { entityId });
+const { trigger, isMutating } = useApiMutation('/api/notes');
+await trigger('POST', { title: 'New note', entityId, entityType });
+```
+
+Token injection is automatic via `TokenProvider` context. After mutations, related SWR cache keys are revalidated.
 
 ## Resources
 
 - [Custom Apps Guide](https://docs.assembly.com/docs/custom-apps-overview)
 - [API Reference](https://docs.assembly.com/reference/getting-started-introduction)
+- [Design System Storybook](https://design-system.assembly.com/)
