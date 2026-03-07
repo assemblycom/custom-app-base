@@ -6,76 +6,19 @@ This app runs as an **iframe** embedded within the Assembly.com dashboard (for i
 
 When your app loads, Assembly passes a `token` query parameter that identifies the current user, workspace, and context. This token is used with the Node SDK to fetch data and make API calls.
 
-## Getting Started
+## TypeScript Rules
 
-### 1. Install Dependencies
-
-```bash
-yarn install
-```
-
-### 2. Create a Custom App in Assembly
-
-1. Log into your Assembly workspace
-2. Navigate to **Settings > App Setup**
-3. Click **Add App** and select **Custom App**
-4. Leave the URLs blank for now (dev-mode handles local development)
-5. Save and note your **API Key**
-
-### 3. Configure Your Environment
-
-Create a `.env.local` file:
-
-```env
-ASSEMBLY_API_KEY=your_api_key_here
-```
-
-The API key must stay server-side only. Never expose it to the client.
-
-### 4. Run the Dev Server
-
-```bash
-yarn dev
-```
-
-This starts the app on port 8080 and opens the Assembly dev-mode page.
+- Import types from source modules, don't recreate inline.
+- Define stores/contexts before consuming components.
+- Verify prop signatures before use; match type names exactly.
+- Export constants needed by other files.
 
 ## Using the Node SDK
 
-### Initializing the SDK
-
-The SDK requires your API key and the session token from query params:
-
-```typescript
-import { assemblyApi } from '@assembly-js/node-sdk';
-
-const assembly = assemblyApi({
-  apiKey: process.env.ASSEMBLY_API_KEY,
-  token: searchParams.token, // From the iframe URL
-});
-```
-
-### Fetching Session Data
-
-```typescript
-// Get workspace info
-const workspace = await assembly.retrieveWorkspace();
-
-// Get token payload to identify the current user
-const tokenPayload = await assembly.getTokenPayload();
-
-// Fetch user data based on token
-if (tokenPayload?.clientId) {
-  const client = await assembly.retrieveClient({ id: tokenPayload.clientId });
-}
-if (tokenPayload?.internalUserId) {
-  const user = await assembly.retrieveInternalUser({
-    id: tokenPayload.internalUserId,
-  });
-}
-```
-
 See `src/utils/session.ts` for a complete example.
+
+- Before using SDK methods or accessing SDK type properties, read the source type/function definition to verify: (1) required vs optional parameters, (2) property nullability. Never assume signatures — verify in the same session.
+- Initializing the SDK requires your API key and the session token from query params:
 
 ## Architecture Pattern
 
