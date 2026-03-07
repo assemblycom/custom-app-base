@@ -21,6 +21,7 @@ See `src/utils/session.ts` for a complete example.
 - Initializing the SDK requires your API key and the session token from query params
 - Before using SDK methods or accessing SDK type properties, read the source type/function definition to verify: (1) required vs optional parameters, (2) property nullability. Never assume signatures — verify in the same session.
 - When using methods from the SDK confirm that parameters required based on the spec. Any endpoints that have parameters are expected to have a parameter object that is used to pass the parameters to the endpoint which can be empty if no parameters are required.
+- When handling the responses from SDK endpoints and formatting, mutating or assigning to variables, use a type guard filter that removes any invalid objects without a valid types. By default the SDK generates all the response object types with optional properties, so this ensures that assigned values have the correct types.
 
 
 ## Architecture Pattern
