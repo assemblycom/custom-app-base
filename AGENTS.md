@@ -6,6 +6,10 @@ This app is a Next.js iframe embedded in the Assembly dashboard (internal users)
 
 Entry point: `app/page.tsx` (server component, routes by view type). Session init: `utils/session.ts`.
 
+## General Guidelines
+
+After making changes run `npx tsc --noEmit` to check for typescript errors and fix them before finalizing the changes.
+
 ## View Patterns
 
 Three view types based on token payload (see `utils/types.ts` for `ViewType`):
@@ -22,7 +26,7 @@ View type is determined in `utils/session.ts` via `determineViewType()`. The hom
 
 The SDK is generated from the [OpenAPI spec](https://docs.assembly.com/openapi/core-resources.json). Always verify method signatures from type definitions before use.
 
-```typescript
+```
 // Initialize (server-side only) — see utils/session.ts
 const assembly = assemblyApi({ apiKey: process.env.ASSEMBLY_API_KEY!, token });
 
@@ -39,7 +43,7 @@ Key methods: `listClients`, `listCompanies`, `listNotes`, `createNote({ requestB
 
 Token is passed via `Authorization: Bearer <token>` header (not query params). Routes use shared helpers from `app/api/_helpers.ts`:
 
-```typescript
+```
 // app/api/notes/route.ts — example pattern
 const token = extractToken(request);  // from Authorization header
 if (!token) return unauthorizedResponse();
@@ -54,7 +58,7 @@ Error responses use `{ error: string }` shape (see `utils/types.ts` `ApiError`).
 
 The app bridge communicates with the parent Assembly frame for header controls. Configure before use with `useBridgeConfig(portalUrl)` — see `bridge/hooks.ts`.
 
-```typescript
+```
 // Detail view breadcrumbs with back navigation
 useBreadcrumbs([
   { label: 'Custom App', onClick: () => router.push('/') },
@@ -70,7 +74,7 @@ Available hooks: `useBreadcrumbs`, `usePrimaryCta`, `useSecondaryCta`, `useActio
 
 Import UI components from `@assembly-js/design-system`. Never use native HTML elements for buttons, headings, text, or form inputs.
 
-```typescript
+```
 import { Button, Heading, Body, Icon, Input, Textarea, Status, Spinner } from '@assembly-js/design-system';
 ```
 
@@ -86,7 +90,7 @@ See `components/shared/EmptyState.tsx` and `components/resources/NoteForm.tsx` f
 
 Client components use SWR hooks from `hooks/useApi.ts`:
 
-```typescript
+```
 const { data, isLoading, mutate } = useApi<Response>('/api/notes', { entityId });
 const { trigger, isMutating } = useApiMutation('/api/notes');
 await trigger('POST', { title: 'New note', entityId, entityType });
