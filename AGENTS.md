@@ -73,7 +73,7 @@ Available hooks: `useBreadcrumbs`, `usePrimaryCta`, `useSecondaryCta`, `useActio
 ## Design System
 
 Import UI components from `@assembly-js/design-system`.
-Do NOT make up props — verify in design-system-type-schema.json.
+When using @assembly-js/design-system components do not make up props, read the type schema at design-system-type-schema.json
 Do not assume additional HTML attributes will be spread to the underlying DOM element and compile correctly.
 
 ## Data Fetching (Client Components)
