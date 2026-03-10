@@ -72,19 +72,9 @@ Available hooks: `useBreadcrumbs`, `usePrimaryCta`, `useSecondaryCta`, `useActio
 
 ## Design System
 
-Import UI components from `@assembly-js/design-system`. Never use native HTML elements for buttons, headings, text, or form inputs.
-
-```
-import { Button, Heading, Body, Icon, Input, Textarea, Status, Spinner } from '@assembly-js/design-system';
-```
-
-Do NOT make up props — verify in [Storybook](https://design-system.assembly.com/). Key notes:
-- `Button` uses `label` prop (not children), supports `variant`, `size`, `loading`
-- `Input` and `Textarea` extend native HTML attributes, add `label` and `error` props
-- For tabs, dialogs, and selects, use Radix primitives (`@radix-ui/react-tabs`, `@radix-ui/react-dialog`, `@radix-ui/react-select`) with Tailwind styling
-- Loading states use `Spinner` component. For content-shaped placeholders, use `animate-pulse` divs
-
-See `components/shared/EmptyState.tsx` and `components/resources/NoteForm.tsx` for examples.
+Import UI components from `@assembly-js/design-system`.
+Do NOT make up props — verify in design-system-type-schema.json.
+Do not assume additional HTML attributes will be spread to the underlying DOM element and compile correctly.
 
 ## Data Fetching (Client Components)
 
