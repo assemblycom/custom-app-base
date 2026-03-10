@@ -17,7 +17,7 @@ export function proxy(request: NextRequest) {
     object-src 'none';
     base-uri 'self';
     form-action 'self';
-    frame-ancestors https://dashboard.copilot.app/ https://*.copilot.app/ dashboard.assembly.com https://*.myassembly.com http://localhost:3000 http://localhost:8080 http://127.0.0.1:3000 http://127.0.0.1:8080;
+    frame-ancestors https://dashboard.copilot.app/ https://*.copilot.app/ dashboard.assembly.com https://*.myassembly.com http://localhost:3000 http://localhost:8080 http://127.0.0.1:3000 http://127.0.0.1:8080 https://*.assembly-staging.com https://*.myassembly-staging.com;
     block-all-mixed-content;
     upgrade-insecure-requests;
 `;
