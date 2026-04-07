@@ -23,7 +23,7 @@ export async function POST(request: Request) {
     limit?: number;
   };
 
-  const assembly = assemblyApi({
+  const assembly = await assemblyApi({
     apiKey,
     token,
   });
