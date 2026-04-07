@@ -29,7 +29,7 @@ export async function GET(request: Request) {
   if (!token) return unauthorizedResponse();
 
   try {
-    const assembly = initSdk(token);
+    const assembly = await initSdk(token);
     const { searchParams } = new URL(request.url);
     const clientId = searchParams.get('clientId') ?? undefined;
     const companyId = searchParams.get('companyId') ?? undefined;
@@ -62,7 +62,7 @@ export async function POST(request: Request) {
       return errorResponse(parsed.error.issues[0].message, 400);
     }
 
-    const assembly = initSdk(token);
+    const assembly = await initSdk(token);
     const result = await assembly.createTask({ requestBody: parsed.data });
     return Response.json(result);
   } catch (err) {
@@ -82,7 +82,7 @@ export async function PUT(request: Request) {
     }
 
     const { id, ...requestBody } = parsed.data;
-    const assembly = initSdk(token);
+    const assembly = await initSdk(token);
     const result = await assembly.updateTask({ id, requestBody });
     return Response.json(result);
   } catch (err) {
@@ -99,7 +99,7 @@ export async function DELETE(request: Request) {
     const id = searchParams.get('id');
     if (!id) return errorResponse('id is required', 400);
 
-    const assembly = initSdk(token);
+    const assembly = await initSdk(token);
     const result = await assembly.deleteTask({ id });
     return Response.json(result);
   } catch (err) {

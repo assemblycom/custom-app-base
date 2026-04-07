@@ -19,7 +19,7 @@ export async function GET(request: Request) {
   if (!token) return unauthorizedResponse();
 
   try {
-    const assembly = initSdk(token);
+    const assembly = await initSdk(token);
     const { searchParams } = new URL(request.url);
     const channelId = searchParams.get('channelId');
     if (!channelId) return errorResponse('channelId is required', 400);
@@ -36,9 +36,7 @@ export async function GET(request: Request) {
     });
     return Response.json(result);
   } catch (err) {
-    return errorResponse(
-      err instanceof Error ? err.message : 'Unknown error',
-    );
+    return errorResponse(err instanceof Error ? err.message : 'Unknown error');
   }
 }
 
@@ -54,12 +52,10 @@ export async function POST(request: Request) {
     }
 
     const { fileType, ...requestBody } = parsed.data;
-    const assembly = initSdk(token);
+    const assembly = await initSdk(token);
     const result = await assembly.createFile({ fileType, requestBody });
     return Response.json(result);
   } catch (err) {
-    return errorResponse(
-      err instanceof Error ? err.message : 'Unknown error',
-    );
+    return errorResponse(err instanceof Error ? err.message : 'Unknown error');
   }
 }

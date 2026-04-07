@@ -14,11 +14,11 @@ After making changes run `npx tsc --noEmit` to check for typescript errors and f
 
 Three view types based on token payload (see `utils/types.ts` for `ViewType`):
 
-| ViewType | Token Contains | Component | Route |
-|---|---|---|---|
-| `internal-overview` | `internalUserId` only | `InternalOverview` | `/` |
-| `internal-detail` | `internalUserId` + `clientId`/`companyId` | `DetailView` | `/` or `/detail` |
-| `client` | `clientId` (no `internalUserId`) | `ClientView` | `/` |
+| ViewType            | Token Contains                            | Component          | Route            |
+| ------------------- | ----------------------------------------- | ------------------ | ---------------- |
+| `internal-overview` | `internalUserId` only                     | `InternalOverview` | `/`              |
+| `internal-detail`   | `internalUserId` + `clientId`/`companyId` | `DetailView`       | `/` or `/detail` |
+| `client`            | `clientId` (no `internalUserId`)          | `ClientView`       | `/`              |
 
 View type is determined in `utils/session.ts` via `determineViewType()`. The home page server component calls `getSession()` and renders the matching view. In-app navigation from overview to detail uses `app/detail/page.tsx` with query params.
 
@@ -47,7 +47,7 @@ Token is passed via `Authorization: Bearer <token>` header (not query params). R
 // app/api/notes/route.ts — example pattern
 const token = extractToken(request);  // from Authorization header
 if (!token) return unauthorizedResponse();
-const assembly = initSdk(token);
+const assembly = await initSdk(token);
 const result = await assembly.listNotes({ entityType, entityId });
 return Response.json(result);
 ```

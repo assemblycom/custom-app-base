@@ -24,7 +24,7 @@ export async function GET(request: Request) {
   if (!token) return unauthorizedResponse();
 
   try {
-    const assembly = initSdk(token);
+    const assembly = await initSdk(token);
     const { searchParams } = new URL(request.url);
     const entityType = searchParams.get('entityType') ?? undefined;
     const entityId = searchParams.get('entityId') ?? undefined;
@@ -39,9 +39,7 @@ export async function GET(request: Request) {
     });
     return Response.json(result);
   } catch (err) {
-    return errorResponse(
-      err instanceof Error ? err.message : 'Unknown error',
-    );
+    return errorResponse(err instanceof Error ? err.message : 'Unknown error');
   }
 }
 
@@ -56,13 +54,11 @@ export async function POST(request: Request) {
       return errorResponse(parsed.error.issues[0].message, 400);
     }
 
-    const assembly = initSdk(token);
+    const assembly = await initSdk(token);
     const result = await assembly.createNote({ requestBody: parsed.data });
     return Response.json(result);
   } catch (err) {
-    return errorResponse(
-      err instanceof Error ? err.message : 'Unknown error',
-    );
+    return errorResponse(err instanceof Error ? err.message : 'Unknown error');
   }
 }
 
@@ -78,13 +74,11 @@ export async function PUT(request: Request) {
     }
 
     const { id, ...requestBody } = parsed.data;
-    const assembly = initSdk(token);
+    const assembly = await initSdk(token);
     const result = await assembly.updateNote({ id, requestBody });
     return Response.json(result);
   } catch (err) {
-    return errorResponse(
-      err instanceof Error ? err.message : 'Unknown error',
-    );
+    return errorResponse(err instanceof Error ? err.message : 'Unknown error');
   }
 }
 
@@ -97,12 +91,10 @@ export async function DELETE(request: Request) {
     const id = searchParams.get('id');
     if (!id) return errorResponse('id is required', 400);
 
-    const assembly = initSdk(token);
+    const assembly = await initSdk(token);
     const result = await assembly.deleteNote({ id });
     return Response.json(result);
   } catch (err) {
-    return errorResponse(
-      err instanceof Error ? err.message : 'Unknown error',
-    );
+    return errorResponse(err instanceof Error ? err.message : 'Unknown error');
   }
 }
