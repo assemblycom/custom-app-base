@@ -14,7 +14,7 @@ export async function getSession(searchParams: SearchParams) {
     'ASSEMBLY_API_KEY is required, guide available at: https://docs.assembly.com/docs/custom-apps-setting-up-your-first-app#step-2-register-your-app-and-get-an-api-key',
   );
 
-  const assembly = assemblyApi({
+  const assembly = await assemblyApi({
     apiKey: apiKey,
     token:
       'token' in searchParams && typeof searchParams.token === 'string'
