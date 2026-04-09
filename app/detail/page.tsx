@@ -40,7 +40,7 @@ export default async function DetailPage({
     process.env.ASSEMBLY_API_KEY,
     'ASSEMBLY_API_KEY is required',
   );
-  const assembly = assemblyApi({ apiKey, token });
+  const assembly = await assemblyApi({ apiKey, token });
 
   let entityType: 'client' | 'company';
   let entityId: string;
@@ -56,9 +56,9 @@ export default async function DetailPage({
       entityType = 'client';
       entityId = clientId;
       const client = await assembly.retrieveClient({ id: clientId });
-      entityName = [client?.givenName, client?.familyName]
-        .filter(Boolean)
-        .join(' ') || 'Client';
+      entityName =
+        [client?.givenName, client?.familyName].filter(Boolean).join(' ') ||
+        'Client';
       entityInfo = client?.email ?? undefined;
     } else {
       entityType = 'company';

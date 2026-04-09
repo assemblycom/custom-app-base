@@ -28,7 +28,7 @@ The SDK is generated from the [OpenAPI spec](https://docs.assembly.com/openapi/c
 
 ```
 // Initialize (server-side only) — see utils/session.ts
-const assembly = assemblyApi({ apiKey: process.env.ASSEMBLY_API_KEY!, token });
+const assembly = await assemblyApi({ apiKey: process.env.ASSEMBLY_API_KEY!, token });
 
 // All response properties are optional — always filter with type guards
 const clients = await assembly.listClients({ limit: 20, nextToken });
