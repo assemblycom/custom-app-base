@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Body, Heading, IconButton, Spinner, Status } from '@assembly-js/design-system';
+import { Body, Heading, IconButton, Status } from '@assembly-js/design-system';
+import { Spinner } from '@/components/ui/spinner';
 import * as Dialog from '@radix-ui/react-dialog';
 import * as Select from '@radix-ui/react-select';
 import { useApi, useApiMutation } from '@/hooks/useApi';
@@ -48,7 +49,7 @@ export function TasksList({ entityType, entityId }: TasksListProps) {
   if (isLoading) {
     return (
       <div className="flex justify-center py-12">
-        <Spinner size={5} />
+        <Spinner className="size-5" />
       </div>
     );
   }

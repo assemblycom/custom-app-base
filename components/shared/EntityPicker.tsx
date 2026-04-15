@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Body, Input, Spinner } from '@assembly-js/design-system';
+import { Body, Input } from '@assembly-js/design-system';
+import { Spinner } from '@/components/ui/spinner';
 
 export interface Entity {
   id: string;
@@ -25,7 +26,7 @@ export function EntityPicker({
   if (isLoading) {
     return (
       <div className="flex justify-center py-12">
-        <Spinner size={5} />
+        <Spinner className="size-5" />
       </div>
     );
   }

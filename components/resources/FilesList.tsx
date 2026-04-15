@@ -1,9 +1,9 @@
 'use client';
 
 import { useRef } from 'react';
-import { Body, Icon, Spinner } from '@assembly-js/design-system';
+import { Body, Icon } from '@assembly-js/design-system';
 import { Button } from '@/components/ui/button';
-import { Spinner as ButtonSpinner } from '@/components/ui/spinner';
+import { Spinner } from '@/components/ui/spinner';
 import { formatDistanceToNow } from 'date-fns';
 import { useApi, useApiMutation } from '@/hooks/useApi';
 import { EmptyState } from '@/components/shared/EmptyState';
@@ -52,7 +52,7 @@ export function FilesList({ channelId }: FilesListProps) {
   if (isLoading) {
     return (
       <div className="flex justify-center py-12">
-        <Spinner size={5} />
+        <Spinner className="size-5" />
       </div>
     );
   }
@@ -110,7 +110,7 @@ export function FilesList({ channelId }: FilesListProps) {
           disabled={isMutating}
           onClick={() => fileInputRef.current?.click()}
         >
-          {isMutating && <ButtonSpinner />}
+          {isMutating && <Spinner />}
           Upload File
         </Button>
         <input

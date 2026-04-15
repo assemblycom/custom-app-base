@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Body, Heading, IconButton, Spinner } from '@assembly-js/design-system';
+import { Body, Heading, IconButton } from '@assembly-js/design-system';
+import { Spinner } from '@/components/ui/spinner';
 import * as Dialog from '@radix-ui/react-dialog';
 import { formatDistanceToNow } from 'date-fns';
 import { useApi } from '@/hooks/useApi';
@@ -51,7 +52,7 @@ export function NotesList({ entityType, entityId }: NotesListProps) {
   if (isLoading) {
     return (
       <div className="flex justify-center py-12">
-        <Spinner size={5} />
+        <Spinner className="size-5" />
       </div>
     );
   }
