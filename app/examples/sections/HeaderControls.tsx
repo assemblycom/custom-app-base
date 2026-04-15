@@ -7,7 +7,7 @@ import {
   usePrimaryCta,
   useSecondaryCta,
 } from '@/bridge/hooks';
-import { Body, Heading, IconButton } from '@assembly-js/design-system';
+import { Body, Heading, Icon } from '@assembly-js/design-system';
 import { Button } from '@/components/ui/button';
 
 function EditableTag({
@@ -28,7 +28,15 @@ function EditableTag({
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />
-      <IconButton onClick={onRemove} icon="Close" label={removeLabel} />
+      <Button
+        variant="ghost"
+        size="icon"
+        className="h-8 w-8 rounded-l-none"
+        aria-label={removeLabel}
+        onClick={onRemove}
+      >
+        <Icon icon="Close" />
+      </Button>
     </div>
   );
 }
@@ -172,11 +180,15 @@ export function HeaderControls() {
               onChange={(e) => setPrimaryCta(e.target.value)}
             />
             {primaryCta && (
-              <IconButton
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8 rounded-l-none"
+                aria-label="Clear primary CTA"
                 onClick={() => setPrimaryCta('')}
-                icon="Close"
-                label="Clear primary CTA"
-              />
+              >
+                <Icon icon="Close" />
+              </Button>
             )}
           </div>
         </ControlRow>
@@ -190,11 +202,15 @@ export function HeaderControls() {
               onChange={(e) => setSecondaryCta(e.target.value)}
             />
             {secondaryCta && (
-              <IconButton
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8 rounded-l-none"
+                aria-label="Clear secondary CTA"
                 onClick={() => setSecondaryCta('')}
-                icon="Close"
-                label="Clear secondary CTA"
-              />
+              >
+                <Icon icon="Close" />
+              </Button>
             )}
           </div>
         </ControlRow>
