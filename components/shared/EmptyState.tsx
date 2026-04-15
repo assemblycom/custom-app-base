@@ -1,7 +1,8 @@
 'use client';
 
-import { Icon, Heading, Body, Button } from '@assembly-js/design-system';
+import { Icon, Heading, Body } from '@assembly-js/design-system';
 import type { IconType } from '@assembly-js/design-system';
+import { Button } from '@/components/ui/button';
 
 interface EmptyStateProps {
   icon: IconType;
@@ -26,7 +27,9 @@ export function EmptyState({
         {description}
       </Body>
       {actionLabel && onAction && (
-        <Button label={actionLabel} onClick={onAction} variant="secondary" />
+        <Button onClick={onAction} variant="outline">
+          {actionLabel}
+        </Button>
       )}
     </div>
   );

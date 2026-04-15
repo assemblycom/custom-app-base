@@ -7,7 +7,8 @@ import {
   usePrimaryCta,
   useSecondaryCta,
 } from '@/bridge/hooks';
-import { Body, Heading, IconButton, Button } from '@assembly-js/design-system';
+import { Body, Heading, IconButton } from '@assembly-js/design-system';
+import { Button } from '@/components/ui/button';
 
 function EditableTag({
   value,
@@ -117,7 +118,7 @@ export function HeaderControls() {
             />
           ))}
           <Button
-            variant="secondary"
+            variant="outline"
             size="sm"
             onClick={() => {
               setBreadcrumbValues((prev) => [
@@ -125,8 +126,9 @@ export function HeaderControls() {
                 `Page ${prev.length + 1}`,
               ]);
             }}
-            label="Add"
-          />
+          >
+            Add
+          </Button>
         </ControlRow>
 
         <ControlRow label="Actions Menu">
@@ -148,7 +150,7 @@ export function HeaderControls() {
             />
           ))}
           <Button
-            variant="secondary"
+            variant="outline"
             size="sm"
             onClick={() => {
               setActionsMenuItems((prev) => [
@@ -156,8 +158,9 @@ export function HeaderControls() {
                 `Action ${prev.length + 1}`,
               ]);
             }}
-            label="Add"
-          />
+          >
+            Add
+          </Button>
         </ControlRow>
 
         <ControlRow label="Primary CTA">

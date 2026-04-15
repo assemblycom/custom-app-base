@@ -1,6 +1,7 @@
 'use client';
 
-import { Body, Heading, Button, Icon } from '@assembly-js/design-system';
+import { Body, Heading, Icon } from '@assembly-js/design-system';
+import { Button } from '@/components/ui/button';
 
 function ShowcaseCard({
   title,
@@ -43,10 +44,10 @@ export function DesignShowcase() {
 
         <ShowcaseCard title="Buttons">
           <div className="flex flex-wrap gap-2">
-            <Button variant="primary" label="Primary" />
-            <Button variant="secondary" label="Secondary" />
-            <Button variant="text" label="Text" />
-            <Button variant="primary" size="sm" label="Small" />
+            <Button>Primary</Button>
+            <Button variant="outline">Secondary</Button>
+            <Button variant="ghost">Text</Button>
+            <Button size="sm">Small</Button>
           </div>
         </ShowcaseCard>
 

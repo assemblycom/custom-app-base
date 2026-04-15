@@ -1,8 +1,10 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { Button, Input, Textarea } from '@assembly-js/design-system';
+import { Input, Textarea } from '@assembly-js/design-system';
 import { Body } from '@assembly-js/design-system';
+import { Button } from '@/components/ui/button';
+import { Spinner } from '@/components/ui/spinner';
 import { useApiMutation } from '@/hooks/useApi';
 
 interface NoteFormProps {
@@ -77,16 +79,16 @@ export function NoteForm({
       )}
       <div className="flex gap-2 justify-end pt-2">
         <Button
-          variant="secondary"
-          label="Cancel"
+          variant="outline"
           onClick={onClose}
           type="button"
-        />
-        <Button
-          label={isEdit ? 'Update Note' : 'Create Note'}
-          loading={isMutating}
-          type="submit"
-        />
+        >
+          Cancel
+        </Button>
+        <Button disabled={isMutating} type="submit">
+          {isMutating && <Spinner />}
+          {isEdit ? 'Update Note' : 'Create Note'}
+        </Button>
       </div>
     </form>
   );

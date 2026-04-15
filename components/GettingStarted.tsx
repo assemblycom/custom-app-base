@@ -1,6 +1,7 @@
 'use client';
 
-import { Body, Heading, Button } from '@assembly-js/design-system';
+import { Body, Heading } from '@assembly-js/design-system';
+import { Button } from '@/components/ui/button';
 
 const DASHBOARD_URL =
   process.env.ASSEMBLY_DASHBOARD_URL || 'https://dashboard.assembly.com';
@@ -15,7 +16,7 @@ export function GettingStarted() {
         started with local development, open this app in dev mode.
       </Body>
       <a href={DEV_MODE_URL}>
-        <Button label="Open in Dev Mode" />
+        <Button>Open in Dev Mode</Button>
       </a>
       <Body size="sm" className="text-gray-400">
         You'll need to be logged into your Assembly dashboard to use dev mode.

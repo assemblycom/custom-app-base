@@ -1,7 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Body, Heading, Button } from '@assembly-js/design-system';
+import { Body, Heading } from '@assembly-js/design-system';
+import { Button } from '@/components/ui/button';
+import { Spinner } from '@/components/ui/spinner';
 
 type Operation = 'listClients' | 'retrieveClient' | 'listCompanies' | 'retrieveCompany';
 
@@ -144,12 +146,14 @@ export function RequestTester({ token }: { token?: string }) {
                 </td>
                 <td className="px-4 py-3 text-right">
                   <Button
-                    variant="secondary"
+                    variant="outline"
                     size="sm"
-                    label={loadingOp === op.value ? '...' : 'Run'}
                     onClick={() => handleRequest(op)}
                     disabled={loadingOp !== null || (op.needsId && !ids[op.value])}
-                  />
+                  >
+                    {loadingOp === op.value && <Spinner />}
+                    Run
+                  </Button>
                 </td>
               </tr>
             ))}
