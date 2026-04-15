@@ -72,10 +72,21 @@ Available hooks: `useBreadcrumbs`, `usePrimaryCta`, `useSecondaryCta`, `useActio
 
 ## Design System
 
-- Import UI components from `@assembly-js/design-system`.
-- When using @assembly-js/design-system components do not make up props, read the types in design-system.d.ts.
-- Do not assume additional HTML attributes will be spread to the underlying DOM element and compile correctly.
-- **Before custom types that will be passed to design-system components, always read design-system.d.ts definitions first.** When passing values to design-system components, derive the value type directly from the component's prop types rather than guessing or creating custom types.
+This project is mid-migration from `@assembly-js/design-system` to a local shadcn-style registry under `@/components/ui/*`. Prefer the shadcn components. Only fall back to `@assembly-js/design-system` when a shadcn equivalent does not yet exist in `components/ui/`.
+
+**Preferred — shadcn registry (`@/components/ui/*`):**
+- `Button` — `@/components/ui/button` — variants: `default`, `destructive`, `outline`, `secondary`, `ghost`, `link`; sizes: `default`, `sm`, `lg`, `icon`. Uses `children` (not a `label` prop). No built-in `loading` prop — pass `disabled` and render `<Spinner />` as a child for loading state.
+- `Spinner` — `@/components/ui/spinner` — defaults to `size-4`; pass `className="size-5"` (or similar) to resize.
+- Check `components/ui/` for additional components before importing anything from `@assembly-js/design-system`.
+
+**Fallback — `@assembly-js/design-system`:**
+Still used for components not yet migrated: `Body`, `Heading`, `Icon`, `IconButton`, `Input`, `Textarea`, `Status`. Do **not** import `Button` or `Spinner` from `@assembly-js/design-system` — use the shadcn versions above.
+
+**Rules for both:**
+- Do not make up props. Read the types in `design-system.d.ts` (for assembly-js) or the component source under `components/ui/` (for shadcn).
+- Do not assume additional HTML attributes will be spread to the underlying DOM element and compile correctly (especially for assembly-js components).
+- **Before defining custom types that will be passed to a design-system component, read the component's type definitions first.** Derive the value type directly from the component's prop types rather than guessing.
+- Use `lucide-react` only when explicitly requested. By default, keep `@assembly-js/design-system` icons (`Icon`, `IconButton`) for iconography until an `Icon` shadcn equivalent is introduced.
 
 ## Data Fetching (Client Components)
 
