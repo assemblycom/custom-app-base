@@ -1,7 +1,16 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { Input, Textarea } from '@assembly-js/design-system';
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
 import { useApiMutation } from '@/hooks/useApi';
@@ -26,11 +35,7 @@ export function TaskForm({
 }: TaskFormProps) {
   const { trigger, isMutating, error } = useApiMutation('/api/tasks');
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>({
+  const form = useForm<FormValues>({
     defaultValues: { name: '', description: '' },
   });
 
@@ -50,31 +55,54 @@ export function TaskForm({
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <Input
-        label="Task Name"
-        {...register('name', { required: 'Task name is required' })}
-        error={errors.name?.message}
-      />
-      <Textarea label="Description" {...register('description')} />
-      {error && (
-        <p className="text-sm text-red-600">
-          {error.message}
-        </p>
-      )}
-      <div className="flex gap-2 justify-end pt-2">
-        <Button
-          variant="outline"
-          onClick={onClose}
-          type="button"
-        >
-          Cancel
-        </Button>
-        <Button disabled={isMutating} type="submit">
-          {isMutating && <Spinner />}
-          Create Task
-        </Button>
-      </div>
-    </form>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <FormField
+          control={form.control}
+          name="name"
+          rules={{ required: 'Task name is required' }}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Task Name</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Description</FormLabel>
+              <FormControl>
+                <Textarea {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        {error && (
+          <p className="text-sm text-red-600">
+            {error.message}
+          </p>
+        )}
+        <div className="flex gap-2 justify-end pt-2">
+          <Button
+            variant="outline"
+            onClick={onClose}
+            type="button"
+          >
+            Cancel
+          </Button>
+          <Button disabled={isMutating} type="submit">
+            {isMutating && <Spinner />}
+            Create Task
+          </Button>
+        </div>
+      </form>
+    </Form>
   );
 }

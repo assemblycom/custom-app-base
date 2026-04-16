@@ -1,7 +1,16 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { Input, Textarea } from '@assembly-js/design-system';
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
 import { useApiMutation } from '@/hooks/useApi';
@@ -29,11 +38,7 @@ export function NoteForm({
   const isEdit = !!note;
   const { trigger, isMutating, error } = useApiMutation('/api/notes');
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>({
+  const form = useForm<FormValues>({
     defaultValues: {
       title: note?.title ?? '',
       content: note?.content ?? '',
@@ -64,31 +69,54 @@ export function NoteForm({
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <Input
-        label="Title"
-        {...register('title', { required: 'Title is required' })}
-        error={errors.title?.message}
-      />
-      <Textarea label="Content" {...register('content')} />
-      {error && (
-        <p className="text-sm text-red-600">
-          {error.message}
-        </p>
-      )}
-      <div className="flex gap-2 justify-end pt-2">
-        <Button
-          variant="outline"
-          onClick={onClose}
-          type="button"
-        >
-          Cancel
-        </Button>
-        <Button disabled={isMutating} type="submit">
-          {isMutating && <Spinner />}
-          {isEdit ? 'Update Note' : 'Create Note'}
-        </Button>
-      </div>
-    </form>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <FormField
+          control={form.control}
+          name="title"
+          rules={{ required: 'Title is required' }}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Title</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="content"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Content</FormLabel>
+              <FormControl>
+                <Textarea {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        {error && (
+          <p className="text-sm text-red-600">
+            {error.message}
+          </p>
+        )}
+        <div className="flex gap-2 justify-end pt-2">
+          <Button
+            variant="outline"
+            onClick={onClose}
+            type="button"
+          >
+            Cancel
+          </Button>
+          <Button disabled={isMutating} type="submit">
+            {isMutating && <Spinner />}
+            {isEdit ? 'Update Note' : 'Create Note'}
+          </Button>
+        </div>
+      </form>
+    </Form>
   );
 }
