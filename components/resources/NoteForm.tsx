@@ -2,7 +2,6 @@
 
 import { useForm } from 'react-hook-form';
 import { Input, Textarea } from '@assembly-js/design-system';
-import { Body } from '@assembly-js/design-system';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
 import { useApiMutation } from '@/hooks/useApi';
@@ -73,9 +72,9 @@ export function NoteForm({
       />
       <Textarea label="Content" {...register('content')} />
       {error && (
-        <Body size="sm" className="text-red-600">
+        <p className="text-sm text-red-600">
           {error.message}
-        </Body>
+        </p>
       )}
       <div className="flex gap-2 justify-end pt-2">
         <Button

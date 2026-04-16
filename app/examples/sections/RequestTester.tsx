@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Body, Heading } from '@assembly-js/design-system';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
 
@@ -81,10 +80,10 @@ export function RequestTester({ token }: { token?: string }) {
   return (
     <section>
       <div className="mb-4">
-        <Heading size="xl">API Request Tester</Heading>
-        <Body size="base" className="text-gray-500 mt-1">
+        <h2 className="text-xl font-semibold tracking-tight">API Request Tester</h2>
+        <p className="text-base text-gray-500 mt-1">
           Try out Assembly API requests using the Node SDK
-        </Body>
+        </p>
       </div>
 
       <div className="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden mb-4">
@@ -92,14 +91,14 @@ export function RequestTester({ token }: { token?: string }) {
           <thead>
             <tr className="border-b border-gray-200">
               <th className="text-left px-4 py-2">
-                <Body size="sm" className="text-gray-500 font-medium">
+                <p className="text-sm text-gray-500 font-medium">
                   Operation
-                </Body>
+                </p>
               </th>
               <th className="text-left px-4 py-2">
-                <Body size="sm" className="text-gray-500 font-medium">
+                <p className="text-sm text-gray-500 font-medium">
                   Parameters
-                </Body>
+                </p>
               </th>
               <th className="px-4 py-2 w-24"></th>
             </tr>
@@ -108,9 +107,9 @@ export function RequestTester({ token }: { token?: string }) {
             {OPERATIONS.map((op) => (
               <tr key={op.value} className="border-b border-gray-200 last:border-b-0">
                 <td className="px-4 py-3">
-                  <Body size="sm" className="font-medium">
+                  <p className="text-sm font-medium">
                     {op.label}
-                  </Body>
+                  </p>
                 </td>
                 <td className="px-4 py-3">
                   {op.needsId ? (
@@ -125,9 +124,9 @@ export function RequestTester({ token }: { token?: string }) {
                     />
                   ) : (
                     <div className="flex items-center gap-2">
-                      <Body size="sm" className="text-gray-500">
+                      <p className="text-sm text-gray-500">
                         limit:
-                      </Body>
+                      </p>
                       <input
                         type="number"
                         min="1"
@@ -163,9 +162,9 @@ export function RequestTester({ token }: { token?: string }) {
 
       {history.length > 0 && (
         <div className="space-y-3">
-          <Body size="sm" className="text-gray-500 font-medium">
+          <p className="text-sm text-gray-500 font-medium">
             Request History
-          </Body>
+          </p>
           {history.map((entry) => (
             <div
               key={entry.id}
@@ -182,16 +181,16 @@ export function RequestTester({ token }: { token?: string }) {
                   >
                     {entry.success ? 'Success' : 'Error'}
                   </span>
-                  <Body size="sm" className="font-medium">
+                  <p className="text-sm font-medium">
                     {OPERATIONS.find((op) => op.value === entry.operation)?.label}
                     {entry.resourceId && (
                       <span className="text-gray-500 ml-1">({entry.resourceId})</span>
                     )}
-                  </Body>
+                  </p>
                 </div>
-                <Body size="sm" className="text-gray-500">
+                <p className="text-sm text-gray-500">
                   {entry.duration}ms
-                </Body>
+                </p>
               </div>
               <pre className="p-4 text-xs overflow-auto max-h-64 bg-gray-900 text-gray-100">
                 {JSON.stringify(entry.response, null, 2)}

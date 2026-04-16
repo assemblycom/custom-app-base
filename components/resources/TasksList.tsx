@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Body, Heading, Icon, Status } from '@assembly-js/design-system';
+import { Icon } from '@assembly-js/design-system';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
 import * as Dialog from '@radix-ui/react-dialog';
@@ -32,10 +33,10 @@ interface TasksListProps {
   entityId: string;
 }
 
-const STATUS_MAP: Record<string, { label: string; status: 'neutral' | 'warning' | 'success' }> = {
-  todo: { label: 'To Do', status: 'neutral' },
-  inProgress: { label: 'In Progress', status: 'warning' },
-  completed: { label: 'Completed', status: 'success' },
+const STATUS_MAP: Record<string, { label: string; className: string }> = {
+  todo: { label: 'To Do', className: 'bg-gray-50 text-gray-700 border-gray-200' },
+  inProgress: { label: 'In Progress', className: 'bg-yellow-50 text-yellow-700 border-yellow-200' },
+  completed: { label: 'Completed', className: 'bg-green-50 text-green-700 border-green-200' },
 };
 
 export function TasksList({ entityType, entityId }: TasksListProps) {
@@ -120,11 +121,11 @@ export function TasksList({ entityType, entityId }: TasksListProps) {
             className="flex items-center gap-3 p-4 border border-gray-100 rounded-lg hover:bg-gray-50"
           >
             <div className="flex-1 min-w-0">
-              <Body size="base">{task.name}</Body>
+              <p className="text-base">{task.name}</p>
               {task.description && (
-                <Body size="sm" className="text-gray-500 mt-0.5">
+                <p className="text-sm text-gray-500 mt-0.5">
                   {task.description}
-                </Body>
+                </p>
               )}
             </div>
             <Select.Root
@@ -132,10 +133,9 @@ export function TasksList({ entityType, entityId }: TasksListProps) {
               onValueChange={(value) => handleStatusChange(task.id, value)}
             >
               <Select.Trigger className="inline-flex items-center gap-1 px-2 py-1 text-xs border border-gray-200 rounded hover:bg-gray-50">
-                <Status
-                  label={statusInfo.label}
-                  status={statusInfo.status}
-                />
+                <Badge variant="outline" className={statusInfo.className}>
+                  {statusInfo.label}
+                </Badge>
               </Select.Trigger>
               <Select.Portal>
                 <Select.Content className="bg-white border border-gray-200 rounded-md shadow-lg p-1 z-50">
@@ -205,9 +205,9 @@ function TaskDialog({
         <Dialog.Overlay className="fixed inset-0 bg-black/50 z-40" />
         <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-6 w-full max-w-md shadow-lg z-50">
           <Dialog.Title asChild>
-            <Heading size="sm" tag="h2">
+            <h2 className="text-sm font-semibold tracking-tight">
               Create Task
-            </Heading>
+            </h2>
           </Dialog.Title>
           <div className="mt-4">
             <TaskForm

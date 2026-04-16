@@ -1,7 +1,7 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { Input, Textarea, Body } from '@assembly-js/design-system';
+import { Input, Textarea } from '@assembly-js/design-system';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
 import { useApiMutation } from '@/hooks/useApi';
@@ -58,9 +58,9 @@ export function TaskForm({
       />
       <Textarea label="Description" {...register('description')} />
       {error && (
-        <Body size="sm" className="text-red-600">
+        <p className="text-sm text-red-600">
           {error.message}
-        </Body>
+        </p>
       )}
       <div className="flex gap-2 justify-end pt-2">
         <Button

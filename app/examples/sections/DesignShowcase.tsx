@@ -1,6 +1,6 @@
 'use client';
 
-import { Body, Heading, Icon } from '@assembly-js/design-system';
+import { Icon } from '@assembly-js/design-system';
 import { Button } from '@/components/ui/button';
 
 function ShowcaseCard({
@@ -12,9 +12,9 @@ function ShowcaseCard({
 }) {
   return (
     <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-      <Body size="sm" className="text-gray-500 mb-3 font-medium">
+      <p className="text-sm text-gray-500 mb-3 font-medium">
         {title}
-      </Body>
+      </p>
       {children}
     </div>
   );
@@ -24,21 +24,21 @@ export function DesignShowcase() {
   return (
     <section>
       <div className="mb-4">
-        <Heading size="xl">Design System</Heading>
-        <Body size="base" className="text-gray-500 mt-1">
+        <h2 className="text-xl font-semibold tracking-tight">Design System</h2>
+        <p className="text-base text-gray-500 mt-1">
           A sampling of components from @assembly-js/design-system
-        </Body>
+        </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <ShowcaseCard title="Typography">
           <div>
-            <Heading size="3xl">Heading 3xl</Heading>
-            <Heading size="2xl">Heading 2xl</Heading>
-            <Heading size="xl">Heading xl</Heading>
-            <Body size="lg">Body large</Body>
-            <Body size="base">Body base</Body>
-            <Body size="sm">Body small</Body>
+            <h2 className="text-3xl font-semibold tracking-tight">Heading 3xl</h2>
+            <h2 className="text-2xl font-semibold tracking-tight">Heading 2xl</h2>
+            <h2 className="text-xl font-semibold tracking-tight">Heading xl</h2>
+            <p className="text-lg">Body large</p>
+            <p className="text-base">Body base</p>
+            <p className="text-sm">Body small</p>
           </div>
         </ShowcaseCard>
 
@@ -82,16 +82,16 @@ export function DesignShowcase() {
         </ShowcaseCard>
 
         <ShowcaseCard title="Full Documentation">
-          <Body size="base" className="mb-3">
+          <p className="text-base mb-3">
             Explore all available components in Storybook.
-          </Body>
+          </p>
           <a
             href="https://main--6639299038cefd2601c9e48a.chromatic.com/"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800"
           >
-            <Body size="base">Open Storybook</Body>
+            <p className="text-base">Open Storybook</p>
             <Icon icon="ArrowNE" className="w-4 h-4" />
           </a>
         </ShowcaseCard>

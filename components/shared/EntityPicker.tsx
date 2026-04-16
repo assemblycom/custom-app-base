@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Body, Input } from '@assembly-js/design-system';
+import { Input } from '@/components/ui/input';
 import { Spinner } from '@/components/ui/spinner';
 
 export interface Entity {
@@ -46,9 +46,9 @@ export function EntityPicker({
       />
       {filtered.length === 0 ? (
         <div className="py-8 text-center">
-          <Body size="sm" className="text-gray-500">
+          <p className="text-sm text-gray-500">
             No results found
-          </Body>
+          </p>
         </div>
       ) : (
         <div className="divide-y divide-gray-100">
@@ -60,11 +60,11 @@ export function EntityPicker({
               onClick={() => onSelect(entity)}
             >
               <div className="min-w-0 flex-1">
-                <Body size="base">{entity.name}</Body>
+                <p className="text-base">{entity.name}</p>
                 {entity.detail && (
-                  <Body size="sm" className="text-gray-500">
+                  <p className="text-sm text-gray-500">
                     {entity.detail}
-                  </Body>
+                  </p>
                 )}
               </div>
             </button>

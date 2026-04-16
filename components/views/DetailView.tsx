@@ -1,7 +1,6 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { Heading, Body } from '@assembly-js/design-system';
 import { Container } from '@/components/Container';
 import { ResourceTabs } from '@/components/shared/ResourceTabs';
 import { useBreadcrumbs, useBridgeConfig } from '@/bridge/hooks';
@@ -37,17 +36,17 @@ export function DetailView({
   return (
     <Container className="max-w-screen-md">
       <div className="mb-8">
-        <Heading size="xl" tag="h1">
+        <h1 className="text-xl font-semibold tracking-tight">
           {entityName}
-        </Heading>
+        </h1>
         {entityInfo && (
-          <Body size="sm" className="text-gray-500 mt-1">
+          <p className="text-sm text-gray-500 mt-1">
             {entityInfo}
-          </Body>
+          </p>
         )}
-        <Body size="xs" className="text-gray-400 mt-1 capitalize">
+        <p className="text-xs text-gray-400 mt-1 capitalize">
           {entityType}
-        </Body>
+        </p>
       </div>
 
       <ResourceTabs entityType={entityType} entityId={entityId} />

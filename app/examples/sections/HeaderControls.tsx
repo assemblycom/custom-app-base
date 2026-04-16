@@ -7,7 +7,7 @@ import {
   usePrimaryCta,
   useSecondaryCta,
 } from '@/bridge/hooks';
-import { Body, Heading, Icon } from '@assembly-js/design-system';
+import { Icon } from '@assembly-js/design-system';
 import { Button } from '@/components/ui/button';
 
 function EditableTag({
@@ -50,9 +50,9 @@ function ControlRow({
 }) {
   return (
     <div className="flex flex-col gap-2 py-3 border-b border-gray-100 last:border-b-0">
-      <Body size="sm" className="text-gray-500 font-medium">
+      <p className="text-sm text-gray-500 font-medium">
         {label}
-      </Body>
+      </p>
       <div className="flex flex-row flex-wrap gap-2">{children}</div>
     </div>
   );
@@ -100,10 +100,10 @@ export function HeaderControls() {
   return (
     <section>
       <div className="mb-4">
-        <Heading size="xl">Header Controls</Heading>
-        <Body size="base" className="text-gray-500 mt-1">
+        <h2 className="text-xl font-semibold tracking-tight">Header Controls</h2>
+        <p className="text-base text-gray-500 mt-1">
           Manipulate the platform header above in real-time
-        </Body>
+        </p>
       </div>
 
       <div className="bg-white border border-gray-200 rounded-lg p-4">
