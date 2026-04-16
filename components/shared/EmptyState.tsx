@@ -1,6 +1,6 @@
 'use client';
 
-import { Icon, Heading, Body } from '@assembly-js/design-system';
+import { Icon } from '@assembly-js/design-system';
 import type { IconType } from '@assembly-js/design-system';
 import { Button } from '@/components/ui/button';
 
@@ -22,10 +22,10 @@ export function EmptyState({
   return (
     <div className="flex flex-col items-center justify-center p-12 text-center gap-4">
       <Icon icon={icon} width={48} height={48} className="text-gray-400" />
-      <Heading size="sm">{message}</Heading>
-      <Body size="base" className="text-gray-500 max-w-md">
+      <h2 className="text-sm font-semibold tracking-tight">{message}</h2>
+      <p className="text-base text-gray-500 max-w-md">
         {description}
-      </Body>
+      </p>
       {actionLabel && onAction && (
         <Button onClick={onAction} variant="outline">
           {actionLabel}

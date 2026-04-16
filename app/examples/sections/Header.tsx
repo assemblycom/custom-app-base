@@ -1,8 +1,6 @@
 'use client';
 
 import { useEffect } from 'react';
-import { Body } from '@assembly-js/design-system';
-
 export function Header() {
   useEffect(() => {
     console.log(`
@@ -19,11 +17,11 @@ export function Header() {
 
   return (
     <header className="mb-12">
-      <Body size="lg" tag="p" className="text-gray-500 max-w-prose">
+      <p className="text-lg text-gray-500 max-w-prose">
         This template demonstrates the capabilities available when building
         custom apps for Assembly. Explore the sections below to see what you
         can build.
-      </Body>
+      </p>
     </header>
   );
 }

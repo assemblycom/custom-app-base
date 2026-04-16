@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Heading } from '@assembly-js/design-system';
 import { Button } from '@/components/ui/button';
 import { Container } from '@/components/Container';
 import { EntityPicker, type Entity } from '@/components/shared/EntityPicker';
@@ -88,9 +87,9 @@ export function InternalOverview({ token }: { token: string }) {
 
   return (
     <Container className="max-w-screen-md">
-      <Heading size="xl" tag="h1" className="mb-6">
+      <h1 className="text-xl font-semibold tracking-tight mb-6">
         Overview
-      </Heading>
+      </h1>
 
       <div className="flex gap-2 mb-6 border-b border-gray-200 pb-2">
         <Button

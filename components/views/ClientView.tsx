@@ -1,6 +1,5 @@
 'use client';
 
-import { Heading, Body } from '@assembly-js/design-system';
 import { Container } from '@/components/Container';
 import { ResourceTabs } from '@/components/shared/ResourceTabs';
 import { useBreadcrumbs } from '@/bridge/hooks';
@@ -26,7 +25,7 @@ export function ClientView({ session }: ClientViewProps) {
   if (!clientId) {
     return (
       <Container className="max-w-screen-md">
-        <Body className="text-gray-500">Unable to load client data.</Body>
+        <p className="text-gray-500">Unable to load client data.</p>
       </Container>
     );
   }
@@ -34,18 +33,18 @@ export function ClientView({ session }: ClientViewProps) {
   return (
     <Container className="max-w-screen-md">
       <div className="mb-8">
-        <Heading size="xl" tag="h1">
+        <h1 className="text-xl font-semibold tracking-tight">
           {clientName}
-        </Heading>
+        </h1>
         {client?.email && (
-          <Body size="sm" className="text-gray-500 mt-1">
+          <p className="text-sm text-gray-500 mt-1">
             {client.email}
-          </Body>
+          </p>
         )}
         {company?.name && (
-          <Body size="sm" className="text-gray-400 mt-1">
+          <p className="text-sm text-gray-400 mt-1">
             {company.name}
-          </Body>
+          </p>
         )}
       </div>
 

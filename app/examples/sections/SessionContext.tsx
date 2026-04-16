@@ -1,6 +1,5 @@
 'use client';
 
-import { Body, Heading } from '@assembly-js/design-system';
 import type { SessionData } from '@/utils/session';
 
 function UserTypeBadge({ isInternal }: { isInternal: boolean }) {
@@ -27,9 +26,9 @@ function InfoCard({
 }) {
   return (
     <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-      <Body size="sm" className="text-gray-500 mb-2">
+      <p className="text-sm text-gray-500 mb-2">
         {title}
-      </Body>
+      </p>
       {children}
     </div>
   );
@@ -82,10 +81,10 @@ export function SessionContext({ session }: { session: SessionData }) {
   return (
     <section>
       <div className="mb-4">
-        <Heading size="xl">Your Session Context</Heading>
-        <Body size="base" className="text-gray-500 mt-1">
+        <h2 className="text-xl font-semibold tracking-tight">Your Session Context</h2>
+        <p className="text-base text-gray-500 mt-1">
           Data available from your session token
-        </Body>
+        </p>
       </div>
 
       <div className="mb-4">
@@ -98,18 +97,18 @@ export function SessionContext({ session }: { session: SessionData }) {
             <div className="flex items-center gap-3">
               <Avatar src={user.avatarImageUrl} name={userName} />
               <div className="min-w-0 flex-1">
-                <Body size="base" className="font-medium truncate">
+                <p className="text-base font-medium truncate">
                   {userName}
-                </Body>
+                </p>
                 {user.email && (
-                  <Body size="sm" className="text-gray-500 truncate">
+                  <p className="text-sm text-gray-500 truncate">
                     {user.email}
-                  </Body>
+                  </p>
                 )}
                 {isInternal && session.internalUser?.role && (
-                  <Body size="sm" className="text-gray-500">
+                  <p className="text-sm text-gray-500">
                     {session.internalUser.role}
-                  </Body>
+                  </p>
                 )}
               </div>
             </div>
@@ -127,13 +126,13 @@ export function SessionContext({ session }: { session: SessionData }) {
                 />
               )}
               <div className="min-w-0 flex-1">
-                <Body size="base" className="font-medium truncate">
+                <p className="text-base font-medium truncate">
                   {session.workspace.brandName || 'Unnamed Workspace'}
-                </Body>
+                </p>
                 {session.workspace.portalUrl && (
-                  <Body size="sm" className="text-gray-500 truncate">
+                  <p className="text-sm text-gray-500 truncate">
                     {session.workspace.portalUrl}
-                  </Body>
+                  </p>
                 )}
               </div>
             </div>
@@ -153,9 +152,9 @@ export function SessionContext({ session }: { session: SessionData }) {
                 <Avatar src={undefined} name={session.company.name || 'C'} />
               )}
               <div className="min-w-0 flex-1">
-                <Body size="base" className="font-medium truncate">
+                <p className="text-base font-medium truncate">
                   {session.company.name || 'Unnamed Company'}
-                </Body>
+                </p>
               </div>
             </div>
           </InfoCard>

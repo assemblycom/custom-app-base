@@ -72,22 +72,39 @@ Available hooks: `useBreadcrumbs`, `usePrimaryCta`, `useSecondaryCta`, `useActio
 
 ## Design System
 
-This project is mid-migration from `@assembly-js/design-system` to a local shadcn-style registry under `@/components/ui/*`. Prefer the shadcn components. Only fall back to `@assembly-js/design-system` when a shadcn equivalent does not yet exist in `components/ui/`.
+Use the local assembly-ui registry components under `@/components/ui/*` when available. Fall back to standard shadcn conventions (plain HTML elements + Tailwind classes) otherwise. The only component still imported from `@assembly-js/design-system` is `Icon` (and its `IconType` type) — use it for all iconography.
 
-**Preferred — shadcn registry (`@/components/ui/*`):**
+**Registry components (`@/components/ui/*`):**
+- `Badge` — `@/components/ui/badge` — variants: `default`, `secondary`, `destructive`, `outline`.
 - `Button` — `@/components/ui/button` — variants: `default`, `destructive`, `outline`, `secondary`, `ghost`, `link`; sizes: `default`, `sm`, `lg`, `icon`. Uses `children` (not a `label` prop). No built-in `loading` prop — pass `disabled` and render `<Spinner />` as a child for loading state.
+- `Form`, `FormField`, `FormItem`, `FormLabel`, `FormControl`, `FormMessage` — `@/components/ui/form` — react-hook-form integration using the Controller pattern. Wrap forms with `<Form {...form}>` and use `<FormField control={form.control} name="fieldName" render={...} />`.
+- `Input` — `@/components/ui/input` — styled `<input>`. Use inside `FormControl` for form fields.
+- `Label` — `@/components/ui/label` — standalone label component.
 - `Spinner` — `@/components/ui/spinner` — defaults to `size-4`; pass `className="size-5"` (or similar) to resize.
-- Icon buttons — use `Button` with `size="icon"` and an assembly-js `<Icon>` as the child. Pass `aria-label` for accessibility. For a smaller icon button, override with `className="h-7 w-7"` (or similar).
-- Check `components/ui/` for additional components before importing anything from `@assembly-js/design-system`.
+- `Textarea` — `@/components/ui/textarea` — styled `<textarea>`. Use inside `FormControl` for form fields.
 
-**Fallback — `@assembly-js/design-system`:**
-Still used for components not yet migrated: `Body`, `Heading`, `Icon`, `Input`, `Textarea`, `Status`. Do **not** import `Button`, `IconButton`, or `Spinner` from `@assembly-js/design-system` — use the shadcn versions above.
+**Icon buttons** — use `Button` with `size="icon"` and an `<Icon>` from `@assembly-js/design-system` as the child. Pass `aria-label` for accessibility. For a smaller icon button, override with `className="h-7 w-7"` (or similar).
 
-**Rules for both:**
-- Do not make up props. Read the types in `design-system.d.ts` (for assembly-js) or the component source under `components/ui/` (for shadcn).
-- Do not assume additional HTML attributes will be spread to the underlying DOM element and compile correctly (especially for assembly-js components).
-- **Before defining custom types that will be passed to a design-system component, read the component's type definitions first.** Derive the value type directly from the component's prop types rather than guessing.
-- Use `lucide-react` only when explicitly requested. By default, keep `@assembly-js/design-system` icons (`Icon`, `IconButton`) for iconography until an `Icon` shadcn equivalent is introduced.
+**Typography** — use plain HTML elements (`<h1>`–`<h6>`, `<p>`, `<span>`) with Tailwind classes. For headings, add `font-semibold tracking-tight`. Font size tokens are defined in `tailwind.config.ts` (`text-2xs` through `text-3xl`).
+
+**Icons — `@assembly-js/design-system`:**
+`Icon` and `IconType` are the only imports from `@assembly-js/design-system`. Do **not** import any other components from it — use the registry components or plain HTML + Tailwind instead. Do not use `lucide-react` unless explicitly requested.
+
+The `Icon` component signature is: `<Icon icon={IconType} {...svgProps} />` where:
+- `icon` (required) — the icon name as an `IconType` string, e.g. `"Plus"`, `"Trash"`, `"Edit"`, `"Settings"`, `"Close"`, `"Search"`, `"ChevronDown"`, `"ArrowNE"`, `"File"`, `"Message"`, `"Book"`.
+- It does **not** accept `name`, `size`, `type`, or `variant` props. There is no `name` prop — use `icon`.
+- It spreads `SVGProps<SVGSVGElement>`, so you can pass `className`, `width`, `height`, etc. Size the icon with `className="w-5 h-5"` (or similar Tailwind classes), not a `size` prop.
+
+```tsx
+import { Icon } from '@assembly-js/design-system';
+
+<Icon icon="Plus" className="w-5 h-5" />
+<Icon icon="Trash" className="w-4 h-4 text-gray-400" />
+```
+
+**Rules:**
+- Do not make up props. Read the component source under `components/ui/` before using a component.
+- **Before defining custom types that will be passed to a component, read the component's type definitions first.** Derive the value type directly from the component's prop types rather than guessing.
 
 ## Data Fetching (Client Components)
 

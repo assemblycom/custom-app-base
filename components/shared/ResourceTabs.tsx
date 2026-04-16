@@ -3,7 +3,6 @@
 import { useState, useCallback } from 'react';
 import * as Tabs from '@radix-ui/react-tabs';
 import * as Dialog from '@radix-ui/react-dialog';
-import { Heading } from '@assembly-js/design-system';
 import { usePrimaryCta } from '@/bridge/hooks';
 import { NotesList } from '@/components/resources/NotesList';
 import { NoteForm } from '@/components/resources/NoteForm';
@@ -100,9 +99,9 @@ export function ResourceTabs({
           <Dialog.Overlay className="fixed inset-0 bg-black/50 z-40" />
           <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-6 w-full max-w-md shadow-lg z-50">
             <Dialog.Title asChild>
-              <Heading size="sm" tag="h2">
+              <h2 className="text-sm font-semibold tracking-tight">
                 Create Note
-              </Heading>
+              </h2>
             </Dialog.Title>
             <div className="mt-4">
               <NoteForm
@@ -122,9 +121,9 @@ export function ResourceTabs({
           <Dialog.Overlay className="fixed inset-0 bg-black/50 z-40" />
           <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-6 w-full max-w-md shadow-lg z-50">
             <Dialog.Title asChild>
-              <Heading size="sm" tag="h2">
+              <h2 className="text-sm font-semibold tracking-tight">
                 Create Task
-              </Heading>
+              </h2>
             </Dialog.Title>
             <div className="mt-4">
               <TaskForm

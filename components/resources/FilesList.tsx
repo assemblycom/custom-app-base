@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { Body, Icon } from '@assembly-js/design-system';
+import { Icon } from '@assembly-js/design-system';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
 import { formatDistanceToNow } from 'date-fns';
@@ -127,13 +127,13 @@ export function FilesList({ channelId }: FilesListProps) {
         >
           <Icon icon="File" className="text-gray-400 shrink-0" />
           <div className="flex-1 min-w-0">
-            <Body size="base">{file.name}</Body>
+            <p className="text-base">{file.name}</p>
             {file.createdAt && (
-              <Body size="xs" className="text-gray-400">
+              <p className="text-xs text-gray-400">
                 {formatDistanceToNow(new Date(file.createdAt), {
                   addSuffix: true,
                 })}
-              </Body>
+              </p>
             )}
           </div>
         </div>

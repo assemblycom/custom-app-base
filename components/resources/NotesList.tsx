@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Body, Heading, Icon } from '@assembly-js/design-system';
+import { Icon } from '@assembly-js/design-system';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
 import * as Dialog from '@radix-ui/react-dialog';
@@ -116,20 +116,20 @@ export function NotesList({ entityType, entityId }: NotesListProps) {
           className="flex items-start gap-3 p-4 border border-gray-100 rounded-lg hover:bg-gray-50"
         >
           <div className="flex-1 min-w-0">
-            <Heading size="2xs" tag="h4">
+            <h4 className="text-2xs font-semibold tracking-tight">
               {note.title}
-            </Heading>
+            </h4>
             {note.content && (
-              <Body size="sm" className="text-gray-600 mt-1 line-clamp-2">
+              <p className="text-sm text-gray-600 mt-1 line-clamp-2">
                 {stripHtml(note.content).slice(0, 120)}
-              </Body>
+              </p>
             )}
             {note.createdAt && (
-              <Body size="xs" className="text-gray-400 mt-1">
+              <p className="text-xs text-gray-400 mt-1">
                 {formatDistanceToNow(new Date(note.createdAt), {
                   addSuffix: true,
                 })}
-              </Body>
+              </p>
             )}
           </div>
           <div className="flex gap-1 shrink-0">
@@ -203,9 +203,9 @@ function NoteDialog({
         <Dialog.Overlay className="fixed inset-0 bg-black/50 z-40" />
         <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-6 w-full max-w-md shadow-lg z-50">
           <Dialog.Title asChild>
-            <Heading size="sm" tag="h2">
+            <h2 className="text-sm font-semibold tracking-tight">
               {note ? 'Edit Note' : 'Create Note'}
-            </Heading>
+            </h2>
           </Dialog.Title>
           <div className="mt-4">
             <NoteForm

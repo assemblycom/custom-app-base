@@ -1,6 +1,6 @@
 'use client';
 
-import { Body, Heading, Icon } from '@assembly-js/design-system';
+import { Icon } from '@assembly-js/design-system';
 
 const RESOURCES = [
   {
@@ -38,12 +38,12 @@ function ResourceCard({
     >
       <div className="flex items-start justify-between gap-2">
         <div>
-          <Body size="base" className="font-medium">
+          <p className="text-base font-medium">
             {title}
-          </Body>
-          <Body size="sm" className="text-gray-500 mt-1">
+          </p>
+          <p className="text-sm text-gray-500 mt-1">
             {description}
-          </Body>
+          </p>
         </div>
         <Icon icon="ArrowNE" className="w-4 h-4 text-gray-400 flex-shrink-0" />
       </div>
@@ -55,10 +55,10 @@ export function Resources() {
   return (
     <section>
       <div className="mb-4">
-        <Heading size="xl">Resources</Heading>
-        <Body size="base" className="text-gray-500 mt-1">
+        <h2 className="text-xl font-semibold tracking-tight">Resources</h2>
+        <p className="text-base text-gray-500 mt-1">
           Documentation and help for building on Assembly
-        </Body>
+        </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
