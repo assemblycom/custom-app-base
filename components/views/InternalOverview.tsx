@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Heading, Button } from '@assembly-js/design-system';
+import { Heading } from '@assembly-js/design-system';
+import { Button } from '@/components/ui/button';
 import { Container } from '@/components/Container';
 import { EntityPicker, type Entity } from '@/components/shared/EntityPicker';
 import { Pagination } from '@/components/shared/Pagination';
@@ -93,17 +94,19 @@ export function InternalOverview({ token }: { token: string }) {
 
       <div className="flex gap-2 mb-6 border-b border-gray-200 pb-2">
         <Button
-          variant={activeTab === 'clients' ? 'primary' : 'secondary'}
-          label="Clients"
+          variant={activeTab === 'clients' ? 'default' : 'outline'}
           size="sm"
           onClick={() => handleTabChange('clients')}
-        />
+        >
+          Clients
+        </Button>
         <Button
-          variant={activeTab === 'companies' ? 'primary' : 'secondary'}
-          label="Companies"
+          variant={activeTab === 'companies' ? 'default' : 'outline'}
           size="sm"
           onClick={() => handleTabChange('companies')}
-        />
+        >
+          Companies
+        </Button>
       </div>
 
       <EntityPicker

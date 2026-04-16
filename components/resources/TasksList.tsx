@@ -1,7 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Body, Heading, IconButton, Spinner, Status } from '@assembly-js/design-system';
+import { Body, Heading, Icon, Status } from '@assembly-js/design-system';
+import { Button } from '@/components/ui/button';
+import { Spinner } from '@/components/ui/spinner';
 import * as Dialog from '@radix-ui/react-dialog';
 import * as Select from '@radix-ui/react-select';
 import { useApi, useApiMutation } from '@/hooks/useApi';
@@ -48,7 +50,7 @@ export function TasksList({ entityType, entityId }: TasksListProps) {
   if (isLoading) {
     return (
       <div className="flex justify-center py-12">
-        <Spinner size={5} />
+        <Spinner className="size-5" />
       </div>
     );
   }
@@ -160,13 +162,15 @@ export function TasksList({ entityType, entityId }: TasksListProps) {
                 </Select.Content>
               </Select.Portal>
             </Select.Root>
-            <IconButton
-              icon="Trash"
-              label="Delete"
-              variant="minimal"
-              size="sm"
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-7 w-7"
+              aria-label="Delete"
               onClick={() => handleDelete(task.id)}
-            />
+            >
+              <Icon icon="Trash" />
+            </Button>
           </div>
         );
       })}

@@ -1,7 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Body, Heading, IconButton, Spinner } from '@assembly-js/design-system';
+import { Body, Heading, Icon } from '@assembly-js/design-system';
+import { Button } from '@/components/ui/button';
+import { Spinner } from '@/components/ui/spinner';
 import * as Dialog from '@radix-ui/react-dialog';
 import { formatDistanceToNow } from 'date-fns';
 import { useApi } from '@/hooks/useApi';
@@ -51,7 +53,7 @@ export function NotesList({ entityType, entityId }: NotesListProps) {
   if (isLoading) {
     return (
       <div className="flex justify-center py-12">
-        <Spinner size={5} />
+        <Spinner className="size-5" />
       </div>
     );
   }
@@ -131,11 +133,11 @@ export function NotesList({ entityType, entityId }: NotesListProps) {
             )}
           </div>
           <div className="flex gap-1 shrink-0">
-            <IconButton
-              icon="Edit"
-              label="Edit"
-              variant="minimal"
-              size="sm"
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-7 w-7"
+              aria-label="Edit"
               onClick={() =>
                 setEditingNote({
                   id: note.id,
@@ -143,15 +145,19 @@ export function NotesList({ entityType, entityId }: NotesListProps) {
                   content: note.content,
                 })
               }
-            />
-            <IconButton
-              icon="Trash"
-              label="Delete"
-              variant="minimal"
-              size="sm"
+            >
+              <Icon icon="Edit" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-7 w-7"
+              aria-label="Delete"
               disabled={isDeleting}
               onClick={() => handleDelete(note.id)}
-            />
+            >
+              <Icon icon="Trash" />
+            </Button>
           </div>
         </div>
       ))}

@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@assembly-js/design-system';
+import { Button } from '@/components/ui/button';
 
 interface PaginationProps {
   nextToken?: string;
@@ -13,10 +13,11 @@ export function Pagination({ nextToken, onPageChange }: PaginationProps) {
   return (
     <div className="flex justify-end pt-4">
       <Button
-        variant="secondary"
-        label="Next"
+        variant="outline"
         onClick={() => onPageChange(nextToken)}
-      />
+      >
+        Next
+      </Button>
     </div>
   );
 }

@@ -1182,6 +1182,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource/inter@npm:^5.2.8":
+  version: 5.2.8
+  resolution: "@fontsource/inter@npm:5.2.8"
+  checksum: 10c0/f737dd50005e4809887ba55ae0c9b7174216d6d14875d17a4fbb9a0ad75dec4265928b805a43fe16a23f14a878f1974a398bbfc84ad65c79fc4d4b9c3ea154e1
+  languageName: node
+  linkType: hard
+
 "@hookform/resolvers@npm:^3.10.0":
   version: 3.10.0
   resolution: "@hookform/resolvers@npm:3.10.0"
@@ -3130,7 +3137,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-slot@npm:1.2.4, @radix-ui/react-slot@npm:^1.2.3":
+"@radix-ui/react-slot@npm:1.2.4, @radix-ui/react-slot@npm:^1.2.4":
   version: 1.2.4
   resolution: "@radix-ui/react-slot@npm:1.2.4"
   dependencies:
@@ -5116,7 +5123,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"class-variance-authority@npm:^0.7.0":
+"class-variance-authority@npm:^0.7.1":
   version: 0.7.1
   resolution: "class-variance-authority@npm:0.7.1"
   dependencies:
@@ -5299,6 +5306,7 @@ __metadata:
     "@assembly-js/app-bridge": "npm:^1.1.0"
     "@assembly-js/design-system": "npm:^3.0.1"
     "@assembly-js/node-sdk": "npm:^3.19.1"
+    "@fontsource/inter": "npm:^5.2.8"
     "@hookform/resolvers": "npm:^3.10.0"
     "@ngrok/ngrok": "npm:^1.4.1"
     "@radix-ui/react-accordion": "npm:^1.2.12"
@@ -5321,7 +5329,7 @@ __metadata:
     "@radix-ui/react-select": "npm:^2.2.6"
     "@radix-ui/react-separator": "npm:1.1.1"
     "@radix-ui/react-slider": "npm:1.2.2"
-    "@radix-ui/react-slot": "npm:^1.2.3"
+    "@radix-ui/react-slot": "npm:^1.2.4"
     "@radix-ui/react-switch": "npm:1.1.2"
     "@radix-ui/react-tabs": "npm:1.1.2"
     "@radix-ui/react-toast": "npm:1.2.4"
@@ -5339,7 +5347,7 @@ __metadata:
     ai: "npm:^5.0.22"
     autoprefixer: "npm:^10.4.20"
     bcrypt-ts: "npm:^7.1.0"
-    class-variance-authority: "npm:^0.7.0"
+    class-variance-authority: "npm:^0.7.1"
     clsx: "npm:^2.1.1"
     cmdk: "npm:1.0.4"
     date-fns: "npm:4.1.0"
@@ -5350,7 +5358,6 @@ __metadata:
     eslint: "npm:^9"
     eslint-config-next: "npm:^16.1.0"
     input-otp: "npm:1.4.1"
-    lucide-react: "npm:^0.540.0"
     nanoid: "npm:^5.1.5"
     next: "npm:^16.1.0"
     next-themes: "npm:^0.4.6"
@@ -5370,9 +5377,9 @@ __metadata:
     sonner: "npm:^1.7.4"
     streamdown: "npm:^1.0.12"
     swr: "npm:^2.3.6"
-    tailwind-merge: "npm:^2.5.5"
+    tailwind-merge: "npm:^3.5.0"
     tailwindcss: "npm:^3.4.1"
-    tailwindcss-animate: "npm:1.0.7"
+    tailwindcss-animate: "npm:^1.0.7"
     tsx: "npm:^4.19.2"
     typescript: "npm:^5.3.3"
     use-stick-to-bottom: "npm:^1.1.1"
@@ -8465,15 +8472,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lucide-react@npm:^0.540.0":
-  version: 0.540.0
-  resolution: "lucide-react@npm:0.540.0"
-  peerDependencies:
-    react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10c0/f4dc8a540b1b079958fdf7a1804dfb3f9093a9393f0c0a4b32a7e839869df5e29946c4fe226f06edd3056f6eccfa77b53e44be89f42379e7fe31c4e59caee3fa
-  languageName: node
-  linkType: hard
-
 "lucide-react@npm:^0.542.0":
   version: 0.542.0
   resolution: "lucide-react@npm:0.542.0"
@@ -11420,21 +11418,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwind-merge@npm:^2.3.0, tailwind-merge@npm:^2.5.5":
+"tailwind-merge@npm:^2.3.0":
   version: 2.6.1
   resolution: "tailwind-merge@npm:2.6.1"
   checksum: 10c0/f9b5d7ba37f6c6dc7bb7a090f08252e8d827b5abfc1031bf468c5274ce104409e7952a0075a3e009aab53adda8c6d133bc1dd9d3427e2ae5bc00306f9ce1fbff
   languageName: node
   linkType: hard
 
-"tailwind-merge@npm:^3.3.1":
+"tailwind-merge@npm:^3.3.1, tailwind-merge@npm:^3.5.0":
   version: 3.5.0
   resolution: "tailwind-merge@npm:3.5.0"
   checksum: 10c0/4dc588f5b5296ba3f38e1ebb41f02b6d24a8c5bb45e44b33748c118fb4b5767dd0efc464431ca3e75404056b618b5f67bec3708158baa65fed8a2fc9201e0c53
   languageName: node
   linkType: hard
 
-"tailwindcss-animate@npm:1.0.7":
+"tailwindcss-animate@npm:^1.0.7":
   version: 1.0.7
   resolution: "tailwindcss-animate@npm:1.0.7"
   peerDependencies:

@@ -1,7 +1,9 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { Button, Input, Textarea, Body } from '@assembly-js/design-system';
+import { Input, Textarea, Body } from '@assembly-js/design-system';
+import { Button } from '@/components/ui/button';
+import { Spinner } from '@/components/ui/spinner';
 import { useApiMutation } from '@/hooks/useApi';
 
 interface TaskFormProps {
@@ -62,12 +64,16 @@ export function TaskForm({
       )}
       <div className="flex gap-2 justify-end pt-2">
         <Button
-          variant="secondary"
-          label="Cancel"
+          variant="outline"
           onClick={onClose}
           type="button"
-        />
-        <Button label="Create Task" loading={isMutating} type="submit" />
+        >
+          Cancel
+        </Button>
+        <Button disabled={isMutating} type="submit">
+          {isMutating && <Spinner />}
+          Create Task
+        </Button>
       </div>
     </form>
   );
