@@ -90,10 +90,21 @@ Use the local assembly-ui registry components under `@/components/ui/*` when ava
 **Icons — `@assembly-js/design-system`:**
 `Icon` and `IconType` are the only imports from `@assembly-js/design-system`. Do **not** import any other components from it — use the registry components or plain HTML + Tailwind instead. Do not use `lucide-react` unless explicitly requested.
 
+The `Icon` component signature is: `<Icon icon={IconType} {...svgProps} />` where:
+- `icon` (required) — the icon name as an `IconType` string, e.g. `"Plus"`, `"Trash"`, `"Edit"`, `"Settings"`, `"Close"`, `"Search"`, `"ChevronDown"`, `"ArrowNE"`, `"File"`, `"Message"`, `"Book"`.
+- It does **not** accept `name`, `size`, `type`, or `variant` props. There is no `name` prop — use `icon`.
+- It spreads `SVGProps<SVGSVGElement>`, so you can pass `className`, `width`, `height`, etc. Size the icon with `className="w-5 h-5"` (or similar Tailwind classes), not a `size` prop.
+
+```tsx
+import { Icon } from '@assembly-js/design-system';
+
+<Icon icon="Plus" className="w-5 h-5" />
+<Icon icon="Trash" className="w-4 h-4 text-gray-400" />
+```
+
 **Rules:**
 - Do not make up props. Read the component source under `components/ui/` before using a component.
 - **Before defining custom types that will be passed to a component, read the component's type definitions first.** Derive the value type directly from the component's prop types rather than guessing.
-- For `Icon` props, read the types in `design-system.d.ts`.
 
 ## Data Fetching (Client Components)
 
