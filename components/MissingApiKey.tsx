@@ -1,6 +1,6 @@
 'use client';
 
-import { Icon } from '@assembly-js/design-system';
+import { Settings, Book } from '@/components/ui/icons';
 import { Container } from '@/components/Container';
 
 export function MissingApiKey() {
@@ -75,7 +75,7 @@ export function MissingApiKey() {
                   variable in your project settings:
                 </p>
                 <div className="flex items-center gap-2 text-sm text-gray-500">
-                  <Icon icon="Settings" className="w-4 h-4" />
+                  <Settings className="w-4 h-4" />
                   <span>
                     Project Settings &rarr; Environment Variables &rarr; Add{' '}
                     <code className="bg-gray-200 px-1.5 py-0.5 rounded">
@@ -107,7 +107,7 @@ export function MissingApiKey() {
 
         <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
           <div className="flex gap-3">
-            <Icon icon="Book" className="w-5 h-5 text-blue-600 flex-shrink-0" />
+            <Book className="w-5 h-5 text-blue-600 flex-shrink-0" />
             <p className="text-sm text-blue-800">
               Need more help? Check out the{' '}
               <a

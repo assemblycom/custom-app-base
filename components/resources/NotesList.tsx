@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Icon } from '@assembly-js/design-system';
+import { Edit, Message, Trash } from '@/components/ui/icons';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
 import * as Dialog from '@radix-ui/react-dialog';
@@ -67,7 +67,7 @@ export function NotesList({ entityType, entityId }: NotesListProps) {
     return (
       <>
         <EmptyState
-          icon="Message"
+          icon={Message}
           message="No notes yet"
           description="Create your first note to get started."
           actionLabel="Add Note"
@@ -146,7 +146,7 @@ export function NotesList({ entityType, entityId }: NotesListProps) {
                 })
               }
             >
-              <Icon icon="Edit" />
+              <Edit />
             </Button>
             <Button
               variant="ghost"
@@ -156,7 +156,7 @@ export function NotesList({ entityType, entityId }: NotesListProps) {
               disabled={isDeleting}
               onClick={() => handleDelete(note.id)}
             >
-              <Icon icon="Trash" />
+              <Trash />
             </Button>
           </div>
         </div>
