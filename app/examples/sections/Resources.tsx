@@ -1,6 +1,6 @@
 'use client';
 
-import { Icon } from '@assembly-js/design-system';
+import { ArrowNE } from '@/components/ui/icons';
 
 const RESOURCES = [
   {
@@ -45,7 +45,7 @@ function ResourceCard({
             {description}
           </p>
         </div>
-        <Icon icon="ArrowNE" className="w-4 h-4 text-gray-400 flex-shrink-0" />
+        <ArrowNE className="w-4 h-4 text-gray-400 flex-shrink-0" />
       </div>
     </a>
   );

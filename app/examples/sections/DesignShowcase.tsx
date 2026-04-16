@@ -1,6 +1,11 @@
 'use client';
 
-import { Icon } from '@assembly-js/design-system';
+import {
+  Plus, Check, Close, Settings, Search, Code, Edit, Trash,
+  Download, Upload, Calendar, Email, Home, Star, Filter,
+  Copy, Link, Send, Message, Notification, Profile, Building,
+  File, Automation, ArrowNE,
+} from '@/components/ui/icons';
 import { Button } from '@/components/ui/button';
 
 function ShowcaseCard({
@@ -53,31 +58,31 @@ export function DesignShowcase() {
 
         <ShowcaseCard title="Icons">
           <div className="flex flex-wrap gap-3">
-            <Icon icon="Plus" className="w-5 h-5" />
-            <Icon icon="Check" className="w-5 h-5" />
-            <Icon icon="Close" className="w-5 h-5" />
-            <Icon icon="Settings" className="w-5 h-5" />
-            <Icon icon="Search" className="w-5 h-5" />
-            <Icon icon="Code" className="w-5 h-5" />
-            <Icon icon="Edit" className="w-5 h-5" />
-            <Icon icon="Trash" className="w-5 h-5" />
-            <Icon icon="Download" className="w-5 h-5" />
-            <Icon icon="Upload" className="w-5 h-5" />
-            <Icon icon="Calendar" className="w-5 h-5" />
-            <Icon icon="Email" className="w-5 h-5" />
-            <Icon icon="Home" className="w-5 h-5" />
-            <Icon icon="Star" className="w-5 h-5" />
-            <Icon icon="Filter" className="w-5 h-5" />
-            <Icon icon="Copy" className="w-5 h-5" />
-            <Icon icon="Link" className="w-5 h-5" />
-            <Icon icon="Send" className="w-5 h-5" />
-            <Icon icon="Message" className="w-5 h-5" />
-            <Icon icon="Notification" className="w-5 h-5" />
-            <Icon icon="Profile" className="w-5 h-5" />
-            <Icon icon="Building" className="w-5 h-5" />
-            <Icon icon="File" className="w-5 h-5" />
-            <Icon icon="Automation" className="w-5 h-5" />
-            <Icon icon="ArrowNE" className="w-5 h-5" />
+            <Plus className="w-5 h-5" />
+            <Check className="w-5 h-5" />
+            <Close className="w-5 h-5" />
+            <Settings className="w-5 h-5" />
+            <Search className="w-5 h-5" />
+            <Code className="w-5 h-5" />
+            <Edit className="w-5 h-5" />
+            <Trash className="w-5 h-5" />
+            <Download className="w-5 h-5" />
+            <Upload className="w-5 h-5" />
+            <Calendar className="w-5 h-5" />
+            <Email className="w-5 h-5" />
+            <Home className="w-5 h-5" />
+            <Star className="w-5 h-5" />
+            <Filter className="w-5 h-5" />
+            <Copy className="w-5 h-5" />
+            <Link className="w-5 h-5" />
+            <Send className="w-5 h-5" />
+            <Message className="w-5 h-5" />
+            <Notification className="w-5 h-5" />
+            <Profile className="w-5 h-5" />
+            <Building className="w-5 h-5" />
+            <File className="w-5 h-5" />
+            <Automation className="w-5 h-5" />
+            <ArrowNE className="w-5 h-5" />
           </div>
         </ShowcaseCard>
 
@@ -92,7 +97,7 @@ export function DesignShowcase() {
             className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800"
           >
             <p className="text-base">Open Storybook</p>
-            <Icon icon="ArrowNE" className="w-4 h-4" />
+            <ArrowNE className="w-4 h-4" />
           </a>
         </ShowcaseCard>
       </div>

@@ -7,7 +7,7 @@ import {
   usePrimaryCta,
   useSecondaryCta,
 } from '@/bridge/hooks';
-import { Icon } from '@assembly-js/design-system';
+import { Close } from '@/components/ui/icons';
 import { Button } from '@/components/ui/button';
 
 function EditableTag({
@@ -35,7 +35,7 @@ function EditableTag({
         aria-label={removeLabel}
         onClick={onRemove}
       >
-        <Icon icon="Close" />
+        <Close />
       </Button>
     </div>
   );
@@ -187,7 +187,7 @@ export function HeaderControls() {
                 aria-label="Clear primary CTA"
                 onClick={() => setPrimaryCta('')}
               >
-                <Icon icon="Close" />
+                <Close />
               </Button>
             )}
           </div>
@@ -209,7 +209,7 @@ export function HeaderControls() {
                 aria-label="Clear secondary CTA"
                 onClick={() => setSecondaryCta('')}
               >
-                <Icon icon="Close" />
+                <Close />
               </Button>
             )}
           </div>

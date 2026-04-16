@@ -72,7 +72,7 @@ Available hooks: `useBreadcrumbs`, `usePrimaryCta`, `useSecondaryCta`, `useActio
 
 ## Design System
 
-Use the local assembly-ui registry components under `@/components/ui/*` when available. Fall back to standard shadcn conventions (plain HTML elements + Tailwind classes) otherwise. The only component still imported from `@assembly-js/design-system` is `Icon` (and its `IconType` type) — use it for all iconography.
+Use the local assembly-ui registry components under `@/components/ui/*` when available. Fall back to standard shadcn conventions (plain HTML elements + Tailwind classes) otherwise. Do **not** import any components from `@assembly-js/design-system`. Do not use `lucide-react` unless explicitly requested.
 
 **Registry components (`@/components/ui/*`):**
 - `Badge` — `@/components/ui/badge` — variants: `default`, `secondary`, `destructive`, `outline`.
@@ -83,23 +83,22 @@ Use the local assembly-ui registry components under `@/components/ui/*` when ava
 - `Spinner` — `@/components/ui/spinner` — defaults to `size-4`; pass `className="size-5"` (or similar) to resize.
 - `Textarea` — `@/components/ui/textarea` — styled `<textarea>`. Use inside `FormControl` for form fields.
 
-**Icon buttons** — use `Button` with `size="icon"` and an `<Icon>` from `@assembly-js/design-system` as the child. Pass `aria-label` for accessibility. For a smaller icon button, override with `className="h-7 w-7"` (or similar).
+**Icon buttons** — use `Button` with `size="icon"` and an icon component from `@/components/ui/icons` as the child. Pass `aria-label` for accessibility. For a smaller icon button, override with `className="h-7 w-7"` (or similar).
 
 **Typography** — use plain HTML elements (`<h1>`–`<h6>`, `<p>`, `<span>`) with Tailwind classes. For headings, add `font-semibold tracking-tight`. Font size tokens are defined in `tailwind.config.ts` (`text-2xs` through `text-3xl`).
 
-**Icons — `@assembly-js/design-system`:**
-`Icon` and `IconType` are the only imports from `@assembly-js/design-system`. Do **not** import any other components from it — use the registry components or plain HTML + Tailwind instead. Do not use `lucide-react` unless explicitly requested.
+**Icons — `@/components/ui/icons`:**
+Icons are individually exported SVG React components from `@/components/ui/icons`. Each icon accepts `SVGProps<SVGSVGElement>` (e.g. `className`, `width`, `height`). There is no wrapper `Icon` component — import each icon by name.
 
-The `Icon` component signature is: `<Icon icon={IconType} {...svgProps} />` where:
-- `icon` (required) — the icon name as an `IconType` string, e.g. `"Plus"`, `"Trash"`, `"Edit"`, `"Settings"`, `"Close"`, `"Search"`, `"ChevronDown"`, `"ArrowNE"`, `"File"`, `"Message"`, `"Book"`.
-- It does **not** accept `name`, `size`, `type`, or `variant` props. There is no `name` prop — use `icon`.
-- It spreads `SVGProps<SVGSVGElement>`, so you can pass `className`, `width`, `height`, etc. Size the icon with `className="w-5 h-5"` (or similar Tailwind classes), not a `size` prop.
+Available icons include: `Plus`, `Trash`, `Edit`, `Settings`, `Close`, `Search`, `ArrowNE`, `File`, `Message`, `Book`, `Check`, `Code`, `Copy`, `Download`, `Upload`, `Calendar`, `Email`, `Home`, `Star`, `Filter`, `Link`, `Send`, `Notification`, `Profile`, `Building`, `Automation`, `Tasks`. Do **not** make up icon names — verify the export exists in `components/ui/icons.tsx` before using it.
+
+Icons do **not** accept `icon`, `name`, `size`, `type`, or `variant` props. Size with `className="w-5 h-5"` (or similar Tailwind classes).
 
 ```tsx
-import { Icon } from '@assembly-js/design-system';
+import { Plus, Trash } from '@/components/ui/icons';
 
-<Icon icon="Plus" className="w-5 h-5" />
-<Icon icon="Trash" className="w-4 h-4 text-gray-400" />
+<Plus className="w-5 h-5" />
+<Trash className="w-4 h-4 text-gray-400" />
 ```
 
 **Rules:**

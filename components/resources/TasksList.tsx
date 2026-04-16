@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Icon } from '@assembly-js/design-system';
+import { Tasks, Trash } from '@/components/ui/icons';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
@@ -64,7 +64,7 @@ export function TasksList({ entityType, entityId }: TasksListProps) {
     return (
       <>
         <EmptyState
-          icon="Tasks"
+          icon={Tasks}
           message="No tasks yet"
           description="Create your first task to get started."
           actionLabel="Add Task"
@@ -169,7 +169,7 @@ export function TasksList({ entityType, entityId }: TasksListProps) {
               aria-label="Delete"
               onClick={() => handleDelete(task.id)}
             >
-              <Icon icon="Trash" />
+              <Trash />
             </Button>
           </div>
         );
