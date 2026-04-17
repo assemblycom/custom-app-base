@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { Icon } from '@assembly-js/design-system';
+import { File } from '@/components/ui/icons';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
 import { formatDistanceToNow } from 'date-fns';
@@ -42,7 +42,7 @@ export function FilesList({ channelId }: FilesListProps) {
   if (!hasChannel) {
     return (
       <EmptyState
-        icon="File"
+        icon={File}
         message="Files"
         description="File management requires a file channel. Configure file channels in your Assembly workspace."
       />
@@ -85,7 +85,7 @@ export function FilesList({ channelId }: FilesListProps) {
     return (
       <>
         <EmptyState
-          icon="File"
+          icon={File}
           message="No files yet"
           description="Upload your first file to get started."
           actionLabel="Upload File"
@@ -125,7 +125,7 @@ export function FilesList({ channelId }: FilesListProps) {
           key={file.id}
           className="flex items-center gap-3 p-4 border border-gray-100 rounded-lg hover:bg-gray-50"
         >
-          <Icon icon="File" className="text-gray-400 shrink-0" />
+          <File className="text-gray-400 shrink-0" />
           <div className="flex-1 min-w-0">
             <p className="text-base">{file.name}</p>
             {file.createdAt && (
