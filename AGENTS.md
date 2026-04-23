@@ -83,18 +83,19 @@ Use the local assembly-ui registry components under `@/components/ui/*` when ava
 - `Spinner` — `@/components/ui/spinner` — defaults to `size-4`; pass `className="size-5"` (or similar) to resize.
 - `Textarea` — `@/components/ui/textarea` — styled `<textarea>`. Use inside `FormControl` for form fields.
 
-**Icon buttons** — use `Button` with `size="icon"` and a `lucide-react` icon as the child. Pass `aria-label` for accessibility. For a smaller icon button, override with `className="h-7 w-7"` (or similar).
+**Icon buttons** — use `Button` with `size="icon"` and a Font Awesome icon as the child. Pass `aria-label` for accessibility. For a smaller icon button, override with `className="h-7 w-7"` (or similar).
 
 **Typography** — use plain HTML elements (`<h1>`–`<h6>`, `<p>`, `<span>`) with Tailwind classes. For headings, add `font-semibold tracking-tight`. Font size tokens are defined in `tailwind.config.ts` (`text-2xs` through `text-3xl`).
 
-**Icons — `lucide-react`:**
-Use icons from the `lucide-react` package. Import them directly by name. Browse available icons at https://lucide.dev/icons. Do **not** import from `@/components/ui/icons`.
+**Icons — Font Awesome (`@fortawesome/react-fontawesome`):**
+Use icons from Font Awesome. Import `FontAwesomeIcon` from `@fortawesome/react-fontawesome` and individual icons from `@fortawesome/free-solid-svg-icons`. Browse available icons at https://fontawesome.com/icons. Do **not** import from `@/components/ui/icons`.
 
 ```tsx
-import { Plus, Trash2 } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 
-<Plus className="w-5 h-5" />
-<Trash2 className="w-4 h-4 text-gray-400" />
+<FontAwesomeIcon icon={faPlus} className="w-5 h-5" />
+<FontAwesomeIcon icon={faTrash} className="w-4 h-4 text-gray-400" />
 ```
 
 **Rules:**
