@@ -83,22 +83,18 @@ Use the local assembly-ui registry components under `@/components/ui/*` when ava
 - `Spinner` — `@/components/ui/spinner` — defaults to `size-4`; pass `className="size-5"` (or similar) to resize.
 - `Textarea` — `@/components/ui/textarea` — styled `<textarea>`. Use inside `FormControl` for form fields.
 
-**Icon buttons** — use `Button` with `size="icon"` and an icon component from `@/components/ui/icons` as the child. Pass `aria-label` for accessibility. For a smaller icon button, override with `className="h-7 w-7"` (or similar).
+**Icon buttons** — use `Button` with `size="icon"` and a `lucide-react` icon as the child. Pass `aria-label` for accessibility. For a smaller icon button, override with `className="h-7 w-7"` (or similar).
 
 **Typography** — use plain HTML elements (`<h1>`–`<h6>`, `<p>`, `<span>`) with Tailwind classes. For headings, add `font-semibold tracking-tight`. Font size tokens are defined in `tailwind.config.ts` (`text-2xs` through `text-3xl`).
 
-**Icons — `@/components/ui/icons`:**
-Icons are individually exported SVG React components from `@/components/ui/icons`. Each icon accepts `SVGProps<SVGSVGElement>` (e.g. `className`, `width`, `height`). There is no wrapper `Icon` component — import each icon by name.
-
-Available icons include: `Plus`, `Trash`, `Edit`, `Settings`, `Close`, `Search`, `ArrowNE`, `File`, `Message`, `Book`, `Check`, `Code`, `Copy`, `Download`, `Upload`, `Calendar`, `Email`, `Home`, `Star`, `Filter`, `Link`, `Send`, `Notification`, `Profile`, `Building`, `Automation`, `Tasks`. Do **not** make up icon names — verify the export exists in `components/ui/icons.tsx` before using it.
-
-Icons do **not** accept `icon`, `name`, `size`, `type`, or `variant` props. Size with `className="w-5 h-5"` (or similar Tailwind classes).
+**Icons — `lucide-react`:**
+Use icons from the `lucide-react` package. Import them directly by name. Browse available icons at https://lucide.dev/icons. Do **not** import from `@/components/ui/icons`.
 
 ```tsx
-import { Plus, Trash } from '@/components/ui/icons';
+import { Plus, Trash2 } from 'lucide-react';
 
 <Plus className="w-5 h-5" />
-<Trash className="w-4 h-4 text-gray-400" />
+<Trash2 className="w-4 h-4 text-gray-400" />
 ```
 
 **Rules:**
